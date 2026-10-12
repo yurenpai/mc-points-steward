@@ -62,7 +62,11 @@ def main():
     refs = re.findall(r'(?:src|href)="([^"]+)"', page)
     external = [r for r in refs if r.startswith(("http://", "https://", "../", "/"))]
     check("无外部/越界引用", external, [])
-    check("唯一引用是本地 GIF", sorted(set(refs)), ["assets/demo.gif"])
+    check("引用均为本地 GIF（demo + points-ladder）",
+          sorted(set(refs)), ["assets/demo.gif", "assets/points-ladder.gif"])
+    check("points-ladder.gif 已本地化到 docs/assets/",
+          os.path.isfile(os.path.join(os.path.dirname(PAGE), "assets",
+                                      "points-ladder.gif")), True)
 
     print("== 4. 无占位符残留 ==")
     left = sum(page.count("__%s__" % k) for k in ("SVG", "SEC1", "SEC2", "SEC3"))

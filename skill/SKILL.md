@@ -163,13 +163,14 @@ python scripts/demo.py --section 2  # 单看兑换榜单（1 账本 / 2 榜单 /
 | 类别 | 文件 | 用途 |
 |---|---|---|
 | **运行时依赖** | `rank_products.py`、`lottery_advice.py` | Skill 实际运行时调用，只做确定性计算，不输出主观判断 |
-| **演示/物料工具** | `demo.py`、`make_banner_svg.py`、`make_report_svg.py`、`make_demo_gif.py`、`make_demo_page.py` | 无 Token 环境的演示与传播物料生成，**不参与 Skill 运行** |
+| **演示/物料工具** | `demo.py`、`make_banner_svg.py`、`make_report_svg.py`、`make_points_ladder.py`、`make_demo_gif.py`、`make_demo_page.py` | 无 Token 环境的演示与传播物料生成，**不参与 Skill 运行** |
 
 物料工具一键重建全部视觉资产：
 
 ```bash
 python scripts/make_banner_svg.py    # → assets/banner.svg（深棕底 + 金拱门品牌横幅）
 python scripts/make_report_svg.py   # → assets/report-card.svg（可截图发群的报告卡）
+python scripts/make_points_ladder.py # → assets/points-ladder.{gif,svg}（积分解锁天梯）
 python scripts/make_demo_gif.py     # → assets/demo.gif（终端风演示动图）
 python scripts/make_demo_page.py    # → docs/index.html（可部署 Pages 的在线演示页）
 ```

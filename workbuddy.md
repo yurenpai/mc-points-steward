@@ -13,7 +13,7 @@
 | 开发时间 | 2026-10-12 10:52 – 16:50（两个会话段：10:52–15:20 调研与定型，16:05–16:50 验证与交付） |
 | 实际调用 MCP 工具 | 8 个（`query-my-account` / `mall-points-products` / `query-lottery-info` / `now-time-info` / `campaign-calendar` / `query-my-coupons` / `query-my-prizes` / `order-list`） |
 | 最终产出 | `mc-points-steward` 技能包：SKILL.md + 3 脚本 + 2 参考资料 + 6 组测试（**150 断言**）+ 6 份真实数据快照 |
-| 测试状态 | **243 项断言全绿**，纯 Python 标准库，无需 pip install |
+| 测试状态 | **280 项断言全绿**，纯 Python 标准库，无需 pip install |
 
 **脱敏声明**：本文件不含 MCP Token、手机号、门牌号、完整账户 ID、orderId 或任何可用于登录的凭据。
 文中出现的账户 ID 均已掩码处理。配置示例一律使用 `${MCD_MCP_TOKEN}` 占位符。
@@ -256,7 +256,7 @@ SKILL.md 规定了**诚信底线**：开口必须声明①这是快照数据而�
 | `skill/scripts/demo.py` | 离线演示 |
 | `skill/references/api_fields.md` | 实测字段档案 + **下单契约** + 降级表 |
 | `skill/references/templates.md` | 6 类输出版式 |
-| `skill/tests/` | 11 个测试文件，**236 条断言全绿**（含安装冒烟 243） |
+| `skill/tests/` | 12 个测试文件，**280 条断言全绿** |
 | `tools/verify.py` | 四层项目自检（断言 / demo / 快照新鲜度 / 物料，一条命令全查） |
 | `README.md` / `MCP_INTEGRATION.md` / `mcp-config.example.json` / `CONTEST_DECLARATION.md` | 参赛必交 |
 
@@ -310,7 +310,7 @@ SKILL.md 规定了**诚信底线**：开口必须声明①这是快照数据而�
 | **缺陷发现** | 发现「默认查询漏报 22% 可兑商品」，并把它从"一次观察"固化成代码 + 25 条断言 |
 | **缺陷发现** | 联调 `mall-product-detail` 时发现 `extTradePrice` 字段，实测 9/9 件均需到店另付现金，**推翻"纯积分兑换"的隐含假设**，固化为代码 + 42 条断言 |
 | 工程实现 | 生成全部 Python 源码（纯标准库、零依赖）、SKILL.md、参考资料与输出模板 |
-| 质量保障 | 编写 **243 条断言**的测试套件，含时间旅行测试（切到 2026-12-28 验证限时掉落标记） |
+| 质量保障 | 编写 **280 条断言**的测试套件，含时间旅行测试（切到 2026-12-28 验证限时掉落标记） |
 | **安全审查** | 全仓扫描发现并修复 accountId 泄露 |
 | 文档交付 | README / MCP_INTEGRATION / mcp-config.example / 本文件 |
 

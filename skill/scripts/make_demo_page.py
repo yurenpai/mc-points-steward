@@ -10,10 +10,11 @@ make_demo_page.py —— 生成静态在线演示页 docs/index.html。
 
 自包含原则（重要）：
     GitHub Pages 的站内相对路径以 docs/ 为根，`../assets/xxx` 会 404。
-    因此本页面把三样东西全部内联/本地化：
+    因此本页面把四样东西全部内联/本地化：
       1. report-card.svg  —— 代码直接内联进 HTML，无路径依赖；
       2. demo.gif          —— 复制一份到 docs/assets/demo.gif；
-      3. demo.py 输出     —— subprocess 实跑后转义进 <pre>，文字未改。
+      3. points-ladder.gif —— 同样复制到 docs/assets/；
+      4. demo.py 输出     —— subprocess 实跑后转义进 <pre>，文字未改。
     产物 docs/ 目录可整体扔到任何静态服务器（包括本地 file:// 打开）。
 
 用法:
@@ -171,14 +172,21 @@ __BANNER__
 __SVG__
 </div>
 
-<h2><span class="num">02</span>动态演示：完整跑一遍</h2>
+<h2><span class="num">02</span>你有多少积分，掌柜就怎么答</h2>
+<p class="hint">不同积分余额拿到的是完全不同的答案。天梯分界（24 / 50 / 100 / 200 / 500 / 800 分）与各级解锁件数，由 <code>make_points_ladder.py</code> 从真实商城数据实算。</p>
+<figure>
+  <img src="assets/points-ladder.gif" alt="积分解锁天梯：24 分解锁抽奖资格，50/100/200/500/800 分逐级解锁 2/4/6/8/9 件可兑商品">
+  <figcaption>积分解锁天梯 · 档位与件数全部实算 · 数据快照 2026-10-12</figcaption>
+</figure>
+
+<h2><span class="num">03</span>动态演示：完整跑一遍</h2>
 <p class="hint">终端风录屏，文字与 <code>python scripts/demo.py</code> 实际输出逐字一致。</p>
 <figure>
   <img src="assets/demo.gif" alt="麦享掌柜离线演示：积分账本、真实可兑榜单、抽奖参谋">
   <figcaption>离线演示 · 数据快照 2026-10-12 · 账户 ID 已脱敏</figcaption>
 </figure>
 
-<h2><span class="num">03</span>三段输出原文</h2>
+<h2><span class="num">04</span>三段输出原文</h2>
 <p class="hint">与 Skill 真实运行时的输出格式完全一致（此处为离线快照）。</p>
 
 <h2 style="font-size:16px;margin-top:28px">W1 · 积分账本</h2>
@@ -190,7 +198,7 @@ __SVG__
 <h2 style="font-size:16px;margin-top:28px">W3 · 积分抽奖参谋</h2>
 <pre>__SEC3__</pre>
 
-<h2><span class="num">04</span>它挖出了三个官方接口不会告诉你的问题</h2>
+<h2><span class="num">05</span>它挖出了三个官方接口不会告诉你的问题</h2>
 <table>
   <tr><th>问题</th><th>实测结论</th><th>后果</th></tr>
   <tr>
@@ -210,7 +218,7 @@ __SVG__
   </tr>
 </table>
 
-<h2><span class="num">05</span>安全边界</h2>
+<h2><span class="num">06</span>安全边界</h2>
 <p>涉及不可逆操作（兑换下单 <code>mall-create-order</code>、抽奖 <code>draw-lottery</code>）时，
 Skill 一定先把<strong>商品名、积分、有效期、到店另付金额</strong>摆出来，
 等你明确说「确认」才动手。资格判定只信官方的 <code>drawDecision</code>，
@@ -244,17 +252,23 @@ def main():
     os.makedirs(DOCS, exist_ok=True)
     # GIF 本地化：GitHub Pages 的 docs/ 为根，无法引用 ../assets/
     os.makedirs(os.path.join(DOCS, "assets"), exist_ok=True)
-    gif_src = os.path.join(ASSETS, "demo.gif")
-    gif_dst = os.path.join(DOCS, "assets", "demo.gif")
-    if os.path.isfile(gif_src):
-        shutil.copyfile(gif_src, gif_dst)
+    for name in ("demo.gif", "points-ladder.gif"):
+        src = os.path.join(ASSETS, name)
+        dst = os.path.join(DOCS, "assets", name)
+        if os.path.isfile(src):
+            shutil.copyfile(src, dst)
+        else:
+            print("⚠️ 缺少 assets/%s（先跑对应 make_* 脚本）" % name)
 
     out = os.path.join(DOCS, "index.html")
     with open(out, "w", encoding="utf-8") as f:
         f.write(page)
 
     print("已生成 %s（%d 字节）" % (out, len(page.encode("utf-8"))))
-    print("GIF 副本 %s（%d 字节）" % (gif_dst, os.path.getsize(gif_dst)))
+    for name in ("demo.gif", "points-ladder.gif"):
+        dst = os.path.join(DOCS, "assets", name)
+        if os.path.isfile(dst):
+            print("GIF 副本 %s（%d 字节）" % (dst, os.path.getsize(dst)))
     print("部署：GitHub 仓库 Settings → Pages → Branch: main · folder: /docs → Save")
 
     if args.open:

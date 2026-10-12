@@ -171,7 +171,7 @@ cd skill && python tests/test_install.py --install --smoke
 
 脚本**绝不输出主观判断**（不会说"这个划算"），只输出 `unit_price`、`days_left`、
 `cash_on_top`、`name_traps` 这样的确定性事实。好处：结果可复现、可测试、可审计——
-**243 条断言钉死行为**。
+**280 条断言钉死行为**。
 
 ### 2. 假上架去伪：不是拍脑袋的功能
 
@@ -278,7 +278,9 @@ mc-points-steward/
 │   ├── banner.svg            品牌横幅（深棕底 + 金拱门，README 首图）
 │   ├── report-card.svg        积分资产体检报告卡（可截图发群）
 │   ├── hidden-cost.svg        真可兑 9 件的隐藏现金成本图
-│   └── demo.gif               终端风演示动图（文字取自 demo.py 实跑）
+│   ├── points-ladder.svg      积分解锁天梯（静态版）
+│   ├── demo.gif               终端风演示动图（文字取自 demo.py 实跑）
+│   └── points-ladder.gif      积分解锁天梯（动态版）
 ├── skill/
 │   ├── SKILL.md               技能本体（工作流 / 数据陷阱 / 安全红线）
 │   ├── scripts/
@@ -287,6 +289,7 @@ mc-points-steward/
 │   │   ├── demo.py            离线演示（无 Token 可跑）
 │   │   ├── make_banner_svg.py 物料：生成品牌横幅 SVG（数字零手抄）
 │   │   ├── make_report_svg.py 物料：生成报告卡 SVG（数字零手抄）
+│   │   ├── make_points_ladder.py 物料：生成积分解锁天梯 GIF + SVG（数字零手抄）
 │   │   ├── make_demo_gif.py   物料：合成演示 GIF（文字取自实跑输出）
 │   │   └── make_demo_page.py  物料：生成 docs/ 在线演示页
 │   ├── references/
@@ -303,6 +306,7 @@ mc-points-steward/
 │       ├── test_demo_gif.py    10 断言（钉死「GIF 选行质量」）
 │       ├── test_demo_page.py   17 断言（钉死「演示页自包含」）
 │       ├── test_banner_svg.py  27 断言（钉死「横幅品牌元素 + 布局不越界」）
+│       ├── test_points_ladder.py 42 断言（钉死「天梯数字实算 + SVG 坐标不越界」）
 │       ├── test_install.py     27 断言（加载冒烟）
 │       └── fixtures/           2026-10-12 真实调用快照（已脱敏）
 └── tools/
@@ -315,7 +319,7 @@ mc-points-steward/
 
 | 层 | 保什么 | 手段 |
 |---|---|---|
-| **L1 断言** | 逻辑 | 11 个测试文件，236 条断言（含冒烟 243） |
+| **L1 断言** | 逻辑 | 12 个测试文件，280 条断言 |
 | **L2 demo** | 形态 | 离线演示三段输出锚点检查 |
 | **L3 对账** | 链路 | 快照新鲜度体检 + 对话实时对账四步 |
 | **L4 物料** | 呈现 | SVG/GIF/HTML 产物在位与合法性 |
@@ -329,7 +333,7 @@ python tools/verify.py
 输出示例：
 
 ```
-■ L1 · 断言回归（保逻辑）       236 条断言全绿
+■ L1 · 断言回归（保逻辑）       280 条断言全绿
 ■ L2 · 离线演示（保形态）       三段输出完整
 ■ L3 · 快照新鲜度（保链路）     默认查询快照：24 件 = 可兑 7 + 已下架 17
 ■ L4 · 视觉物料（保呈现）       5 个产物校验通过
@@ -367,11 +371,12 @@ python tests/test_classify.py     # 35 ✓
 python tests/test_points_value.py # 17 ✓
 python tests/test_report_svg.py   # 18 ✓
 python tests/test_demo_gif.py     # 10 ✓
-python tests/test_demo_page.py    # 17 ✓
-python tests/test_banner_svg.py  # 27 ✓
+python tests/test_demo_page.py    # 18 ✓
+python tests/test_banner_svg.py   # 27 ✓
+python tests/test_points_ladder.py # 42 ✓
 python tests/test_install.py --install --smoke   # 27 ✓
 
-# 合计 243 项
+# 合计 280 项
 ```
 
 ## 离线演示
@@ -381,6 +386,10 @@ python tests/test_install.py --install --smoke   # 27 ✓
 ![终端演示动图](assets/demo.gif)
 
 *↑ 不是录屏——`make_demo_gif.py` 用 `demo.py` 的实跑输出逐帧合成，文字与真实输出逐字一致。*
+
+![积分解锁天梯](assets/points-ladder.gif)
+
+*↑ 不同积分余额，答案完全不同——天梯分界（24 / 50 / 100 / 200 / 500 / 800 分）与各级解锁件数全部由 `make_points_ladder.py` 从真实商城数据实算。[静态 SVG 版](assets/points-ladder.svg)*
 
 ```bash
 python skill/scripts/demo.py              # 三段全跑
@@ -393,9 +402,10 @@ README 首图、演示 GIF、在线演示页全部由脚本生成，**数字零�
 改了数据或判定逻辑，重跑即可，图文不会漂移：
 
 ```bash
-python skill/scripts/make_report_svg.py   # → assets/report-card.svg
-python skill/scripts/make_demo_gif.py     # → assets/demo.gif
-python skill/scripts/make_demo_page.py    # → docs/index.html
+python skill/scripts/make_report_svg.py    # → assets/report-card.svg
+python skill/scripts/make_points_ladder.py # → assets/points-ladder.{gif,svg}
+python skill/scripts/make_demo_gif.py      # → assets/demo.gif
+python skill/scripts/make_demo_page.py     # → docs/index.html
 ```
 
 ## License

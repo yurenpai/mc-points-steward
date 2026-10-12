@@ -203,14 +203,21 @@
 </svg>
 </div>
 
-<h2><span class="num">02</span>动态演示：完整跑一遍</h2>
+<h2><span class="num">02</span>你有多少积分，掌柜就怎么答</h2>
+<p class="hint">不同积分余额拿到的是完全不同的答案。天梯分界（24 / 50 / 100 / 200 / 500 / 800 分）与各级解锁件数，由 <code>make_points_ladder.py</code> 从真实商城数据实算。</p>
+<figure>
+  <img src="assets/points-ladder.gif" alt="积分解锁天梯：24 分解锁抽奖资格，50/100/200/500/800 分逐级解锁 2/4/6/8/9 件可兑商品">
+  <figcaption>积分解锁天梯 · 档位与件数全部实算 · 数据快照 2026-10-12</figcaption>
+</figure>
+
+<h2><span class="num">03</span>动态演示：完整跑一遍</h2>
 <p class="hint">终端风录屏，文字与 <code>python scripts/demo.py</code> 实际输出逐字一致。</p>
 <figure>
   <img src="assets/demo.gif" alt="麦享掌柜离线演示：积分账本、真实可兑榜单、抽奖参谋">
   <figcaption>离线演示 · 数据快照 2026-10-12 · 账户 ID 已脱敏</figcaption>
 </figure>
 
-<h2><span class="num">03</span>三段输出原文</h2>
+<h2><span class="num">04</span>三段输出原文</h2>
 <p class="hint">与 Skill 真实运行时的输出格式完全一致（此处为离线快照）。</p>
 
 <h2 style="font-size:16px;margin-top:28px">W1 · 积分账本</h2>
@@ -387,7 +394,7 @@
 ──────────────────────────────────
 </pre>
 
-<h2><span class="num">04</span>它挖出了三个官方接口不会告诉你的问题</h2>
+<h2><span class="num">05</span>它挖出了三个官方接口不会告诉你的问题</h2>
 <table>
   <tr><th>问题</th><th>实测结论</th><th>后果</th></tr>
   <tr>
@@ -407,7 +414,7 @@
   </tr>
 </table>
 
-<h2><span class="num">05</span>安全边界</h2>
+<h2><span class="num">06</span>安全边界</h2>
 <p>涉及不可逆操作（兑换下单 <code>mall-create-order</code>、抽奖 <code>draw-lottery</code>）时，
 Skill 一定先把<strong>商品名、积分、有效期、到店另付金额</strong>摆出来，
 等你明确说「确认」才动手。资格判定只信官方的 <code>drawDecision</code>，

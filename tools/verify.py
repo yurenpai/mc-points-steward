@@ -45,6 +45,7 @@ L1_TESTS = [
     "test_filter.py", "test_rank.py", "test_cat_merge.py", "test_hidden_cost.py",
     "test_classify.py", "test_points_value.py", "test_report_svg.py",
     "test_demo_gif.py", "test_demo_page.py", "test_banner_svg.py",
+    "test_points_ladder.py",
     "test_install.py",
 ]
 L2_ANCHORS = [
@@ -57,7 +58,9 @@ L4_FILES = [
     (os.path.join("assets", "banner.svg"), "svg"),
     (os.path.join("assets", "report-card.svg"), "svg"),
     (os.path.join("assets", "hidden-cost.svg"), "svg"),
+    (os.path.join("assets", "points-ladder.svg"), "svg"),
     (os.path.join("assets", "demo.gif"), "gif"),
+    (os.path.join("assets", "points-ladder.gif"), "gif"),
     (os.path.join("docs", "index.html"), "html"),
 ]
 
@@ -201,6 +204,7 @@ def check_l4(rebuild=False):
     line()
     if rebuild:
         for script in ("make_banner_svg.py", "make_report_svg.py",
+                       "make_points_ladder.py",
                        "make_demo_gif.py", "make_demo_page.py"):
             path = os.path.join(SKILL, "scripts", script)
             print("  重建 %s ..." % script)

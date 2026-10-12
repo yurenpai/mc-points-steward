@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" width="860" height="400" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<title>积分解锁天梯 · 麦享掌柜</title>
+<desc>不同积分区间下 Skill 给出的不同决策。档位分界与解锁件数 全部来自 2026-10-12 真实商城数据实算。</desc>
+<defs><linearGradient id="axis" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFC72C"/><stop offset="1" stop-color="#DA291C"/></linearGradient><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="860" height="400" rx="12" fill="#1E1D26"/>
+<text x="24" y="34" font-size="21" font-weight="700" fill="#FFC72C">你有多少积分，掌柜就怎么答</text>
+<g transform="translate(798,8) scale(0.55)" filter="url(#glow)"><path d="M 10 92 C 10 22 26 10 42 10 C 54 10 58 24 60 50 C 62 24 66 10 78 10 C 94 10 110 22 110 92" fill="none" stroke="#FFC72C" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="24" y="58" font-size="12" fill="#8C8A82">档位分界与解锁件数，全部来自 2026-10-12 真实商城数据实算</text>
+<text x="24" y="76" font-size="12" fill="#8C8A82">每 100 积分账面现值 ¥13.79 · 800 分 ≈ ¥110.3</text>
+<line x1="122" y1="232" x2="738" y2="232" stroke="url(#axis)" stroke-width="3" stroke-linecap="round"/>
+<circle cx="122.0" cy="232" r="4.5" fill="#FFC72C"/>
+<text x="122.0" y="256" font-size="12" fill="#8C8A82" text-anchor="middle">0</text>
+<circle cx="224.7" cy="232" r="4.5" fill="#FFC72C"/>
+<text x="224.7" y="256" font-size="12" fill="#8C8A82" text-anchor="middle">24</text>
+<circle cx="327.3" cy="232" r="4.5" fill="#FFC72C"/>
+<text x="327.3" y="256" font-size="12" fill="#8C8A82" text-anchor="middle">50</text>
+<circle cx="430.0" cy="232" r="4.5" fill="#FFC72C"/>
+<text x="430.0" y="256" font-size="12" fill="#8C8A82" text-anchor="middle">100</text>
+<circle cx="532.7" cy="232" r="4.5" fill="#FFC72C"/>
+<text x="532.7" y="256" font-size="12" fill="#8C8A82" text-anchor="middle">200</text>
+<circle cx="635.3" cy="232" r="4.5" fill="#FFC72C"/>
+<text x="635.3" y="256" font-size="12" fill="#8C8A82" text-anchor="middle">500</text>
+<circle cx="738.0" cy="232" r="4.5" fill="#FFC72C"/>
+<text x="738.0" y="256" font-size="12" fill="#8C8A82" text-anchor="middle">800</text>
+<text x="24" y="237" font-size="11" fill="#8C8A82">单位：积分</text>
+<line x1="224.7" y1="232" x2="224.7" y2="204" stroke="#4A4858" stroke-width="1.5"/>
+<rect x="150.7" y="112" width="148" height="92" rx="10" fill="#262430" stroke="#FFC72C" stroke-opacity="0.45" stroke-width="1.5"/>
+<text x="162.7" y="136" font-size="16" fill="#FFC72C" font-weight="700">24 分</text>
+<text x="162.7" y="159" font-size="12" fill="#E8E6DF">解锁抽奖资格</text>
+<text x="162.7" y="178" font-size="11" fill="#8C8A82">24分/次·10品</text>
+<text x="162.7" y="196" font-size="11" fill="#8C8A82">最高回血30分</text>
+<line x1="327.3" y1="232" x2="327.3" y2="260" stroke="#4A4858" stroke-width="1.5"/>
+<rect x="253.3" y="260" width="148" height="92" rx="10" fill="#262430" stroke="#FFC72C" stroke-opacity="0.45" stroke-width="1.5"/>
+<text x="265.3" y="284" font-size="16" fill="#FFC72C" font-weight="700">50 分</text>
+<text x="265.3" y="307" font-size="12" fill="#E8E6DF">解锁 2 件可兑</text>
+<text x="265.3" y="326" font-size="11" fill="#E8E6DF">可乐麦炫酷</text>
+<text x="265.3" y="344" font-size="11" fill="#F0997B">另付¥6.9起</text>
+<line x1="430.0" y1="232" x2="430.0" y2="204" stroke="#4A4858" stroke-width="1.5"/>
+<rect x="356.0" y="112" width="148" height="92" rx="10" fill="#262430" stroke="#FFC72C" stroke-opacity="0.45" stroke-width="1.5"/>
+<text x="368.0" y="136" font-size="16" fill="#FFC72C" font-weight="700">100 分</text>
+<text x="368.0" y="159" font-size="12" fill="#E8E6DF">解锁 4 件可兑</text>
+<text x="368.0" y="178" font-size="11" fill="#E8E6DF">指定小食任选</text>
+<text x="368.0" y="196" font-size="11" fill="#F0997B">另付¥3.9起</text>
+<line x1="532.7" y1="232" x2="532.7" y2="260" stroke="#4A4858" stroke-width="1.5"/>
+<rect x="458.7" y="260" width="148" height="92" rx="10" fill="#262430" stroke="#FFC72C" stroke-opacity="0.45" stroke-width="1.5"/>
+<text x="470.7" y="284" font-size="16" fill="#FFC72C" font-weight="700">200 分</text>
+<text x="470.7" y="307" font-size="12" fill="#E8E6DF">解锁 6 件可兑</text>
+<text x="470.7" y="326" font-size="11" fill="#E8E6DF">2份麦辣鸡翅</text>
+<text x="470.7" y="344" font-size="11" fill="#F0997B">另付¥10.9起</text>
+<line x1="635.3" y1="232" x2="635.3" y2="204" stroke="#4A4858" stroke-width="1.5"/>
+<rect x="561.3" y="112" width="148" height="92" rx="10" fill="#262430" stroke="#FFC72C" stroke-opacity="0.45" stroke-width="1.5"/>
+<text x="573.3" y="136" font-size="16" fill="#FFC72C" font-weight="700">500 分</text>
+<text x="573.3" y="159" font-size="12" fill="#E8E6DF">解锁 8 件可兑</text>
+<text x="573.3" y="178" font-size="11" fill="#E8E6DF">板烧可乐组合</text>
+<text x="573.3" y="196" font-size="11" fill="#F0997B">另付¥16.9起</text>
+<line x1="738.0" y1="232" x2="738.0" y2="260" stroke="#4A4858" stroke-width="1.5"/>
+<rect x="664.0" y="260" width="148" height="92" rx="10" fill="#262430" stroke="#FFC72C" stroke-opacity="0.45" stroke-width="1.5"/>
+<text x="676.0" y="284" font-size="16" fill="#FFC72C" font-weight="700">800 分</text>
+<text x="676.0" y="307" font-size="12" fill="#E8E6DF">解锁 9 件可兑</text>
+<text x="676.0" y="326" font-size="11" fill="#E8E6DF">巨无霸可乐组合</text>
+<text x="676.0" y="344" font-size="11" fill="#F0997B">另付¥21.9起</text>
+<text x="24" y="374" font-size="12" fill="#F0997B">⚠ 同名不同分：指定小食任选 100 与 200 分并存，掌柜会标出</text>
+<text x="430" y="390" font-size="11" fill="#8C8A82" text-anchor="middle">麦享掌柜 mc-points-steward · 麦当劳中国 MCP 开发者创新大赛参赛作品</text>
+</svg>
