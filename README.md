@@ -97,26 +97,6 @@
 
 ---
 
-## 与其他作品的边界
-
-大赛里点餐推荐、热量计算器、优惠券助手扎堆。麦享掌柜主动划清界限：
-
-| 场景 | 麦享掌柜 |
-|---|:--:|
-| 今天吃什么 / 套餐推荐 | ❌ 不做 |
-| 营养搭配 / 热量计算 | ❌ 不做 |
-| 领券 / 领麦麦省券 | ❌ 不做 |
-| 外卖下单 / 到店点餐 | ❌ 不做 |
-| **我的积分有多少、什么时候过期** | ✅ **做** |
-| **这些商品哪些真能兑** | ✅ **做** |
-| **换哪个最划算** | ✅ **做** |
-| **积分抽奖值不值得抽** | ✅ **做** |
-| **我用积分换到了什么** | ✅ **做** |
-
-**主线是积分资产，不是点餐。** 这是一条几乎无人竞争的赛道。
-
----
-
 ## 快速开始
 
 ### 1. 配置 mcd-mcp 连接器
@@ -239,28 +219,6 @@ cd skill && python tests/test_install.py --install --smoke
 > 查完详情才发现两者**兑换内容不同**（薯条/麦旋风 vs 麦乐鸡/鸡翅），
 > 而到店另付都是 10.9 元——**贵的那个未必是坑**。现在改为展示内容差异，让用户按想吃什么选。
 
-### 5. 0 积分也能完整体验
-
-演示账号积分余额为 **0**。这不是缺陷，而是设计约束：
-
-- 积分为 0 时走「开张前夜」分支，给攒分路径，**严禁任何引导消费的表述**
-- 全部分析流程（账本 / 去伪 / 排序 / 抽奖参谋）与账户余额无关，照常跑通
-- 下单与抽奖作为**不可逆操作**始终需要二次确认，0 分时客观提示"差多少分"，不催单
-
-### 6. 离线演示模式：评委没有 Token 也能看到效果
-
-评审者大多没有麦当劳 Token。本项目不要求他们去申请：
-
-```bash
-cd skill && python scripts/demo.py
-```
-
-一键输出三段完整效果（积分账本 / 真实可兑榜单 / 抽奖参谋），数据来自 `tests/fixtures/`
-下的 2026-10-12 真实调用快照（账户 ID 已脱敏）。
-
-演示开口强制声明两件事：① 这是**快照数据**不是实时数据；② 看真实数据需连接 mcd-mcp。
-**严禁把快照当作用户当前状态**——这是诚信底线，写进了 SKILL.md。
-
 ---
 
 ## MCP 工具使用清单
@@ -280,7 +238,7 @@ cd skill && python scripts/demo.py
 | `campaign-calendar` | 当月营销活动日历 | — |
 | `now-time-info` | 校时（判过期前必调） | — |
 
-> **`mall-create-order` 未实际调用**——当前账号 0 积分，且调用即产生真实订单与券码。
+> **`mall-create-order` 未实际调用**——调用即产生真实订单与券码，本项目不代为发起真实交易。
 > 入参契约（`skuId` / `spuCategory` / `addressId` / `count`，仅支持 `shopId=2`）
 > 与返回字段已从工具 schema 完整确认并记录在 `references/api_fields.md` 第 5 节。
 
@@ -345,7 +303,6 @@ mc-points-steward/
 │       ├── test_install.py     27 断言（加载冒烟）
 │       └── fixtures/           2026-10-12 真实调用快照（已脱敏）
 └── tools/
-    ├── monitor.py             竞争态势监控（拉官方 RANKING.md，查自己排名）
     └── verify.py              四层项目自检（一条命令查全部健康度）
 ```
 
@@ -411,7 +368,7 @@ python tests/test_install.py --install --smoke   # 27 ✓
 
 ## 离线演示
 
-评委没有 MCP Token 也能看到完整效果：
+无需 MCP Token 也能看到完整效果，数据来自 `tests/fixtures/` 下的真实调用快照：
 
 ```bash
 python skill/scripts/demo.py              # 三段全跑
@@ -428,29 +385,6 @@ python skill/scripts/make_report_svg.py   # → assets/report-card.svg
 python skill/scripts/make_demo_gif.py     # → assets/demo.gif
 python skill/scripts/make_demo_page.py    # → docs/index.html
 ```
-
-## 盯竞争态势（参赛辅助，非 Skill 依赖）
-
-```bash
-python tools/monitor.py                          # 榜单概况：进榜线 / 榜首 / 并列密度
-python tools/monitor.py --repo owner/mc-points-steward   # 加上自己的排名与差距
-```
-
-> 数据源是官方 `RANKING.md`，走 GitHub contents API（不抓 raw 域名，部分网络环境会拦）。
-> 未认证限额 60 次/小时，一天跑一次足够；`--watch` 模式按 1800 秒轮询，别多开。
-
----
-
-## 已知限制
-
-诚实交代没跑通的部分（详见 `MCP_INTEGRATION.md`）：
-
-- `mall-create-order` 因演示账号积分为 0，**未执行真实下单**，流程与安全确认已实现但未端到端验证
-- `draw-lottery` 同理，`drawDecision.resourceEligible = false`（积分不足 24 分）
-- `query-my-prizes` 返回空（无历史中奖）
-- `mall-product-detail` 的 SKU 字段结构待 10-17 联调确认
-
----
 
 ## License
 

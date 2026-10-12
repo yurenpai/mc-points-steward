@@ -254,7 +254,7 @@ def apply_detail(meta, detail):
 def points_value(redeemable, point):
     """把积分按「最优兑换出口」折算成人民币现值。
 
-    口径说明（与竞品「每 100 积分兑 X 元」一致，但全部由本仓库实测数据算出）：
+    口径说明（全部由本仓库实测数据算出）：
         best_rate     = min(unit_price)   # 分/元，每花 1 元需付多少积分，越小越划算
         每100积分现值  = 100 / best_rate   # 元
         积分现值       = point / best_rate # 元

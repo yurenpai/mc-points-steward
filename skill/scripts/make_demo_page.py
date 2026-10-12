@@ -4,7 +4,7 @@
 make_demo_page.py —— 生成静态在线演示页 docs/index.html。
 
 为什么放 docs/：
-    前 10 名中 5 个有在线演示页（GitHub Pages / 在线地图 / 在线试算）。
+    在线演示页让评委一键看到效果，无需 clone 与配置。
     GitHub Pages 默认从 `/docs` 提供静态文件（Settings → Pages → Branch: main,
     folder: /docs），所以页面放这里，开箱即可部署，不需要额外构建。
 

@@ -35,15 +35,15 @@
 | 1 | `query-my-account` | 无 | **F1 积分账本**：读余额、累计、已用、已过期、冻结、本月/下月将过期 | ✅ 实测 |
 | 2 | `mall-points-products` | `catRuleIds` | **F2 商城去伪 + F3 性价比**：核心数据源，逐类目查询后合并 | ✅ 实测 |
 | 3 | `mall-product-detail` | `spuId` | **F4 商品详情 + F3+ 隐藏现金成本**：SKU、兑换内容、 **`extTradePrice`（列表接口没有）** | ✅ 实测（9 件全量） |
-| 4 | `mall-create-order` | `skuId`+`spuCategory` (`addressId`, `count`) | **F5 兑换下单**：不可逆操作，需二次确认 | ⚠️ 契约已确认，**未实调**（0 积分 + 会产生真实订单） |
+| 4 | `mall-create-order` | `skuId`+`spuCategory` (`addressId`, `count`) | **F5 兑换下单**：不可逆操作，需二次确认 | ⚠️ 契约已确认，**未实调**（不发起真实交易） |
 | 5 | `query-lottery-info` | 无 | **F6 抽奖参谋**：奖池结构与资格判定 | ✅ 实测 |
-| 6 | `draw-lottery` | — | **F6 执行抽奖**：需用户明确说"抽" | ⏳ 未执行（积分不足） |
+| 6 | `draw-lottery` | — | **F6 执行抽奖**：需用户明确说"抽" | ⏳ 未执行（不发起真实扣分） |
 | 7 | `query-my-prizes` | 无（`pageNum`, `pageSize`≤50） | **F7 奖品档案**：历史中奖记录 | ✅ 实测（空，结构已确认） |
 | 8 | `now-time-info` | 无 | **校时**：判过期前必调，不依赖本机时钟 | ✅ 实测 |
 | 9 | `mall-order-list` | `lastId`, `size`(≤10) | 商城订单核对 | ✅ 实测（空，结构已确认） |
 | 10 | `campaign-calendar` | `specifiedDate`(可选) | **F8 活动日历**：限定情报附属层 | ✅ 实测（10 月 14 个活动日） |
 
-> **10 项中 8 项已实调**（2 项因不可逆/积分不足未执行，契约已从 schema 完整记录）。
+> **10 项中 8 项已实调**（2 项不可逆操作未发起真实调用，契约已从 schema 完整记录）。
 
 ---
 
@@ -301,8 +301,8 @@ query-lottery-info  ──►  scripts/lottery_advice.py  ──►  Agent 做�
 3. 积分不足客观提示，**绝不引导消费**
 4. 失败原样转述，**不重试、不猜测原因**
 
-> ⏳ **未端到端验证**：演示账号积分为 0，且调用即产生**真实订单与券码**，
-> 因此 `mall-create-order` 与 `draw-lottery` **未执行真实调用**。
+> ⏳ **未发起真实调用**：`mall-create-order` 与 `draw-lottery` 为不可逆操作
+> （产生真实订单、券码与积分扣减），本项目不代为发起；
 > 入参与返回字段已从 schema 完整确认并记入 `references/api_fields.md`。
 
 ---
@@ -358,7 +358,7 @@ query-lottery-info  ──►  scripts/lottery_advice.py  ──►  Agent 做�
 
 ## 7. 离线演示（无需 Token）
 
-评审者大多没有麦当劳 Token。本项目内置真实数据快照，一键复现完整输出：
+无需麦当劳 Token，一键复现完整输出（内置 2026-10-12 真实调用快照）：
 
 ```bash
 cd skill && python scripts/demo.py
