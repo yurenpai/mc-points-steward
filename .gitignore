@@ -1,0 +1,40 @@
+# ============================================================
+# 麦享掌柜 mc-points-steward — 公开仓库排除项
+# 原则：只把「交付物」公开；过程资产全部收在 _archive/ 且不入库
+# ============================================================
+
+# ---- 过程资产总归档（官方文档抓取 / 竞品样本 / 分析数据 / 内部文档）----
+_archive/
+
+# ---- 保险丝：即使将来有过程文件被移出 _archive/，也拦下来 ----
+mcp_doc_full.md
+guide.md
+wb_samples/
+early_readmes/
+iss_early.json
+iss_late.json
+repos_early.txt
+repos_late.txt
+tmp_star_check.py
+Skill开发规划.md
+麦当劳大赛.md
+开工交接单.md
+报名Issue草稿.md
+Star获取策略.md
+workbuddy.md-写作规范与样本分析.md
+
+# ---- Python 缓存与临时文件 ----
+__pycache__/
+*.py[cod]
+*.tmp.json
+
+# ---- 系统杂项 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 敏感信息保险丝：真实凭证一旦误入即阻止提交 ----
+*token*.json
+!mcp-config.example.json
+*.env
+secrets.*

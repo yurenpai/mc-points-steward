@@ -1,0 +1,36 @@
+<svg viewBox="0 0 680 300" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<title>麦享掌柜 mc-points-steward — 麦当劳积分资产管家</title>
+<desc>2026-10-12 麦当劳官方 MCP 实测：标称上架的积分类商品中 18 件名存实亡（假上架率 67%）；9 件真可兑中 9 件需到店另付现金，纯积分白拿 0 件；默认查询漏报 2 件。</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0d08"/><stop offset="55%" stop-color="#2b1108"/><stop offset="100%" stop-color="#140806"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#FFC72C"/><stop offset="100%" stop-color="#FF8A00"/></linearGradient>
+<filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur in="SourceAlpha" stdDeviation="7" result="b"/><feFlood flood-color="#FFB020" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="halo"/><feMerge><feMergeNode in="halo"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="680" height="300" fill="url(#bg)"/>
+<circle cx="30" cy="300" r="150" fill="#FFC72C" opacity="0.07"/>
+<circle cx="680" cy="24" r="170" fill="#DA291C" opacity="0.12"/>
+<g filter="url(#glow)" transform="translate(46,68) scale(0.86)">
+<path d="M 10 92 C 10 22 26 10 42 10 C 54 10 58 24 60 50 C 62 24 66 10 78 10 C 94 10 110 22 110 92" fill="none" stroke="#FFC72C" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="190" y="92" font-size="40" fill="#FFFFFF" font-weight="700" letter-spacing="4">麦享掌柜</text>
+<text x="192" y="118" font-size="14" fill="#FFC72C" letter-spacing="1.5" font-family="'Menlo','Consolas',monospace">mc-points-steward</text>
+<rect x="192" y="132" width="120" height="3.5" rx="1.75" fill="url(#gold)"/>
+<text x="190" y="160" font-size="15" fill="#F2E6D8">别的工具帮你点这一单，</text>
+<text x="190" y="182" font-size="15" fill="#F2E6D8">我们帮你守住积分资产。</text>
+<text x="190" y="206" font-size="10.5" fill="#B8A88F" letter-spacing="1">麦当劳中国 MCP 开发者创新大赛 · 参赛作品</text>
+<rect x="24" y="230" width="202" height="48" rx="10" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFC72C" stroke-opacity="0.28"/>
+<text x="38" y="252" font-size="19" fill="#FFC72C" font-weight="700">67%</text>
+<text x="38" y="269" font-size="10" fill="#F2E6D8">假上架率</text>
+<text x="212" y="252" font-size="11" fill="#B8A88F" text-anchor="end">· 18</text>
+<text x="212" y="268" font-size="9.5" fill="#B8A88F" text-anchor="end">件名存实亡</text>
+<rect x="238" y="230" width="202" height="48" rx="10" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFC72C" stroke-opacity="0.28"/>
+<text x="252" y="252" font-size="19" fill="#FFC72C" font-weight="700">0 件</text>
+<text x="252" y="269" font-size="10" fill="#F2E6D8">纯积分白拿</text>
+<text x="426" y="252" font-size="11" fill="#B8A88F" text-anchor="end">· 9</text>
+<text x="426" y="268" font-size="9.5" fill="#B8A88F" text-anchor="end">件需到店另付</text>
+<rect x="452" y="230" width="202" height="48" rx="10" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFC72C" stroke-opacity="0.28"/>
+<text x="466" y="252" font-size="19" fill="#FFC72C" font-weight="700">2 件</text>
+<text x="466" y="269" font-size="10" fill="#F2E6D8">默认查询漏报</text>
+<text x="640" y="252" font-size="11" fill="#B8A88F" text-anchor="end">· 27</text>
+<text x="640" y="268" font-size="9.5" fill="#B8A88F" text-anchor="end">件标称上架</text>
+</svg>

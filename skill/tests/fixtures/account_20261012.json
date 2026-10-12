@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "captured_at": "2026-10-12 15:36:43",
+    "source": "mcd-mcp query-my-account (真实调用)",
+    "note": "accountId 已脱敏（保留前 8 位与后 4 位，中间掩码）；其余字段原样保留。本文件用于离线演示与测试，不含任何可用于登录的凭据。",
+    "field_name_warning": "官方字段名拼作 currentMouthExpirePoint（Mouth 非 Month），lastMouthExpirePoint / nextMouthExpirePoint 同样拼错，代码里必须原样照抄"
+  },
+  "data": {
+    "availablePoint": "0",
+    "accountId": "02007421*****************7704",
+    "accumulativePoint": "0",
+    "currency": "麦享会积分",
+    "currentMouthExpirePoint": "0",
+    "expiredPoint": "0",
+    "frozenPoint": "0",
+    "lastMouthExpirePoint": "0",
+    "nextMouthExpirePoint": "0",
+    "usedPoint": "0"
+  }
+}

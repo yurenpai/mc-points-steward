@@ -1,0 +1,36 @@
+{
+  "_meta": {
+    "captured_at": "2026-10-12 14:59:52",
+    "source": "mcd-mcp query-lottery-info (真实调用)",
+    "note": "已裁剪 imageUrl 以减小体积"
+  },
+  "data": {
+    "status": {"code": "SUCCESS", "message": "成功"},
+    "activityCode": "dtx2",
+    "activityStatusText": "进行中",
+    "activityName": "麦麦积分抽奖",
+    "beginTime": "2025-01-26 00:00:00",
+    "endTime": "2030-12-31 23:59:59",
+    "drawPoint": "24",
+    "drawTypeText": "消耗积分抽奖",
+    "availablePoint": "0",
+    "drawDecision": {
+      "resourceEligible": false,
+      "reason": "积分不足",
+      "nextConsumption": {"type": "POINTS", "points": "24", "chances": 0, "text": "本次将消耗 24 积分"},
+      "fallbackConsumption": null
+    },
+    "prizes": [
+      {"name": "下单立减3元券", "typeText": "优惠券"},
+      {"name": "下单立减2元券", "typeText": "优惠券"},
+      {"name": "下单立减1元券", "typeText": "优惠券"},
+      {"name": "麦辣三件套5折券", "typeText": "优惠券"},
+      {"name": "板烧三件套5折券", "typeText": "优惠券"},
+      {"name": "双层鳕鱼三件套6折券", "typeText": "优惠券"},
+      {"name": "甜辣小食组合5折券", "typeText": "优惠券"},
+      {"name": "小食四件套5.5折券", "typeText": "优惠券"},
+      {"name": "麦旋风5折券", "typeText": "优惠券"},
+      {"name": "30积分", "typeText": "积分奖"}
+    ]
+  }
+}

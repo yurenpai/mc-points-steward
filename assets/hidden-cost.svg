@@ -1,0 +1,80 @@
+<svg viewBox="0 0 680 462" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<title>麦当劳积分商城真可兑 9 件的隐藏现金成本</title>
+<desc>2026-10-12 实测：9 件真可兑商品全部需要到店另付现金，无一件是纯积分白拿。按性价比分每元排序，最优 7.25 分/元，最差 36.53 分/元。</desc>
+
+<rect x="0" y="0" width="680" height="462" fill="#FFFFFF"/>
+
+<text x="24" y="32" font-size="16" font-weight="500" fill="#26215C">麦当劳积分商城 · 真可兑 9 件的隐藏成本</text>
+<text x="24" y="54" font-size="12" fill="#5F5E5A">2026-10-12 实测快照 · 按「分/元」性价比升序排列（条越短越划算）</text>
+
+<rect x="24" y="68" width="632" height="44" rx="8" fill="#993C1D"/>
+<text x="40" y="90" font-size="13" font-weight="500" fill="#FFFFFF">9 件真可兑商品，9 件需到店另付现金</text>
+<text x="40" y="104" font-size="12" fill="#F5C4B3">纯积分白拿：0 件 · 兑换得到的是「券」，不是商品</text>
+
+<text x="24" y="140" font-size="11" fill="#888780">商品</text>
+<text x="252" y="140" font-size="11" fill="#888780" text-anchor="end">积分</text>
+<text x="288" y="140" font-size="11" fill="#888780">性价比（分/元）</text>
+<text x="560" y="140" font-size="11" fill="#888780" text-anchor="end">分/元</text>
+<text x="656" y="140" font-size="11" fill="#888780" text-anchor="end">到店另付</text>
+<line x1="24" y1="148" x2="656" y2="148" stroke="#D3D1C7" stroke-width="0.5"/>
+
+<g font-size="12">
+  <text x="24" y="167" fill="#2C2C2A">6.9元可乐麦炫酷</text>
+  <text x="252" y="167" fill="#444441" text-anchor="end">50</text>
+  <rect x="288" y="158" width="46" height="14" rx="3" fill="#F0997B"/>
+  <text x="560" y="167" fill="#2C2C2A" text-anchor="end">7.25</text>
+  <text x="656" y="167" fill="#993C1D" text-anchor="end">¥6.9</text>
+
+  <text x="24" y="197" fill="#2C2C2A">6.9元香芋派/菠萝派任选</text>
+  <text x="252" y="197" fill="#444441" text-anchor="end">50</text>
+  <rect x="288" y="188" width="46" height="14" rx="3" fill="#F0997B"/>
+  <text x="560" y="197" fill="#2C2C2A" text-anchor="end">7.25</text>
+  <text x="656" y="197" fill="#993C1D" text-anchor="end">¥6.9</text>
+
+  <text x="24" y="227" fill="#2C2C2A">10.9元指定小食任选</text>
+  <text x="252" y="227" fill="#444441" text-anchor="end">100</text>
+  <rect x="288" y="218" width="58" height="14" rx="3" fill="#F0997B"/>
+  <text x="560" y="227" fill="#2C2C2A" text-anchor="end">9.17</text>
+  <text x="656" y="227" fill="#993C1D" text-anchor="end">¥10.9</text>
+
+  <text x="24" y="257" fill="#2C2C2A">16.9元2份麦辣鸡翅</text>
+  <text x="252" y="257" fill="#444441" text-anchor="end">200</text>
+  <rect x="288" y="248" width="75" height="14" rx="3" fill="#F0997B"/>
+  <text x="560" y="257" fill="#2C2C2A" text-anchor="end">11.83</text>
+  <text x="656" y="257" fill="#993C1D" text-anchor="end">¥16.9</text>
+
+  <text x="24" y="287" fill="#2C2C2A">10.9元指定小食任选</text>
+  <text x="252" y="287" fill="#444441" text-anchor="end">200</text>
+  <rect x="288" y="278" width="116" height="14" rx="3" fill="#E07050"/>
+  <text x="560" y="287" fill="#2C2C2A" text-anchor="end">18.35</text>
+  <text x="656" y="287" fill="#993C1D" text-anchor="end">¥10.9</text>
+
+  <text x="24" y="317" fill="#2C2C2A">3.9元圆筒冰淇淋</text>
+  <text x="252" y="317" fill="#444441" text-anchor="end">100</text>
+  <rect x="288" y="308" width="161" height="14" rx="3" fill="#D85A30"/>
+  <text x="560" y="317" fill="#2C2C2A" text-anchor="end">25.64</text>
+  <text x="656" y="317" fill="#993C1D" text-anchor="end">¥3.9</text>
+
+  <text x="24" y="347" fill="#2C2C2A">17.9元板烧可乐组合</text>
+  <text x="252" y="347" fill="#444441" text-anchor="end">500</text>
+  <rect x="288" y="338" width="176" height="14" rx="3" fill="#D85A30"/>
+  <text x="560" y="347" fill="#2C2C2A" text-anchor="end">27.93</text>
+  <text x="656" y="347" fill="#993C1D" text-anchor="end">¥17.9</text>
+
+  <text x="24" y="377" fill="#2C2C2A">16.9元麦辣可乐组合</text>
+  <text x="252" y="377" fill="#444441" text-anchor="end">500</text>
+  <rect x="288" y="368" width="186" height="14" rx="3" fill="#C24E28"/>
+  <text x="560" y="377" fill="#2C2C2A" text-anchor="end">29.59</text>
+  <text x="656" y="377" fill="#993C1D" text-anchor="end">¥16.9</text>
+
+  <text x="24" y="407" fill="#2C2C2A">21.9元巨无霸可乐组合</text>
+  <text x="252" y="407" fill="#444441" text-anchor="end">800</text>
+  <rect x="288" y="398" width="230" height="14" rx="3" fill="#993C1D"/>
+  <text x="560" y="407" fill="#2C2C2A" text-anchor="end">36.53</text>
+  <text x="656" y="407" fill="#993C1D" text-anchor="end">¥21.9</text>
+</g>
+
+<line x1="24" y1="424" x2="656" y2="424" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="24" y="442" font-size="11" fill="#888780">最优 7.25 分/元 与 最差 36.53 分/元 相差 5.04 倍 · 口径为券面价（到店支付价），MCP 不提供原价故不计折扣率</text>
+<text x="24" y="456" font-size="11" fill="#888780">数据来源：mcd-mcp 真实调用 · 麦享掌柜 mc-points-steward</text>
+</svg>

@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "source": "mall-product-detail × 9",
+    "captured_at": "2026-10-12 18:34",
+    "scope": "真可兑 9 件全量（spuId 17073~17081），逐一查询，无抽样",
+    "purpose": "钉死「隐藏现金成本」结论：真可兑商品全部需要到店另付现金",
+    "desensitized": "不含真实 accountId / token；note 字段已整体省略（官方要求原文展示，不做结构化解析）"
+  },
+  "details": [
+    {
+      "spuId": 17073,
+      "spuName": "6.9元可乐麦炫酷",
+      "shopId": 2,
+      "spuCategory": "1",
+      "categoryRuleId": "1>4>13",
+      "upDate": "2026-06-25 00:00:03",
+      "downDate": "2026-12-30 23:59:59",
+      "spuLimit": {"ruleType": 1, "rule": "", "cycle": 0, "limitCount": -1, "baseCount": 1, "limitSingle": -1},
+      "skuList": [{"skuId": 17779, "points": "50", "price": "0", "extTradePrice": "6.9"}]
+    },
+    {
+      "spuId": 17074,
+      "spuName": "6.9元香芋派/菠萝派任选",
+      "shopId": 2,
+      "spuCategory": "1",
+      "categoryRuleId": "1>4>13",
+      "upDate": "2026-06-25 00:00:00",
+      "downDate": "2026-12-30 23:59:59",
+      "spuLimit": {"ruleType": 1, "rule": "", "cycle": 0, "limitCount": -1, "baseCount": 1, "limitSingle": -1},
+      "skuList": [{"skuId": 17780, "points": "50", "price": "0", "extTradePrice": "6.9"}]
+    },
+    {
+      "spuId": 17075,
+      "spuName": "3.9元圆筒冰淇淋",
+      "shopId": 2,
+      "spuCategory": "1",
+      "categoryRuleId": "1>4>13",
+      "upDate": "2026-06-25 00:00:03",
+      "downDate": "2026-12-30 23:59:59",
+      "spuLimit": {"ruleType": 1, "rule": "", "cycle": 0, "limitCount": -1, "baseCount": 1, "limitSingle": -1},
+      "skuList": [{"skuId": 17781, "points": "100", "price": "0", "extTradePrice": "3.9"}]
+    },
+    {
+      "spuId": 17076,
+      "spuName": "10.9元指定小食任选",
+      "shopId": 2,
+      "spuCategory": "1",
+      "categoryRuleId": "1>4>13",
+      "upDate": "2026-06-25 00:00:00",
+      "downDate": "2026-12-30 23:59:59",
+      "spuLimit": {"ruleType": 1, "rule": "", "cycle": 0, "limitCount": -1, "baseCount": 1, "limitSingle": -1},
+      "skuList": [{"skuId": 17782, "points": "100", "price": "0", "extTradePrice": "10.9"}],
+      "_contents": "中薯条/奥利奥麦旋风 任选1件"
+    },
+    {
+      "spuId": 17077,
+      "spuName": "10.9元指定小食任选",
+      "shopId": 2,
+      "spuCategory": "1",
+      "categoryRuleId": "1>4>13",
+      "upDate": "2026-06-25 00:00:03",
+      "downDate": "2026-12-30 23:59:59",
+      "spuLimit": {"ruleType": 1, "rule": "", "cycle": 0, "limitCount": -1, "baseCount": 1, "limitSingle": -1},
+      "skuList": [{"skuId": 17783, "points": "200", "price": "0", "extTradePrice": "10.9"}],
+      "_contents": "麦乐鸡-4块/麦辣鸡翅-2块/那么大鸡排（椒盐风味）任选1件"
+    },
+    {
+      "spuId": 17078,
+      "spuName": "16.9元2份麦辣鸡翅",
+      "shopId": 2,
+      "spuCategory": "1",
+      "categoryRuleId": "1>4>13",
+      "upDate": "2026-06-25 00:00:00",
+      "downDate": "2026-12-30 23:59:59",
+      "spuLimit": {"ruleType": 1, "rule": "", "cycle": 0, "limitCount": -1, "baseCount": 1, "limitSingle": -1},
+      "skuList": [{"skuId": 17784, "points": "200", "price": "0", "extTradePrice": "16.9"}]
+    },
+    {
+      "spuId": 17079,
+      "spuName": "16.9元麦辣可乐组合",
+      "shopId": 2,
+      "spuCategory": "1",
+      "categoryRuleId": "1>4>13",
+      "upDate": "2026-06-25 00:00:03",
+      "downDate": "2026-12-30 23:59:59",
+      "spuLimit": {"ruleType": 1, "rule": "", "cycle": 0, "limitCount": -1, "baseCount": 1, "limitSingle": -1},
+      "skuList": [{"skuId": 17785, "points": "500", "price": "0", "extTradePrice": "16.9"}]
+    },
+    {
+      "spuId": 17080,
+      "spuName": "17.9元板烧可乐组合",
+      "shopId": 2,
+      "spuCategory": "1",
+      "categoryRuleId": "1>4>13",
+      "upDate": "2026-06-25 00:00:00",
+      "downDate": "2026-12-30 23:59:59",
+      "spuLimit": {"ruleType": 1, "rule": "", "cycle": 0, "limitCount": -1, "baseCount": 1, "limitSingle": -1},
+      "skuList": [{"skuId": 17786, "points": "500", "price": "0", "extTradePrice": "17.9"}]
+    },
+    {
+      "spuId": 17081,
+      "spuName": "21.9元巨无霸可乐组合",
+      "shopId": 2,
+      "spuCategory": "1",
+      "categoryRuleId": "1>4>13",
+      "upDate": "2026-06-25 00:00:03",
+      "downDate": "2026-12-30 23:59:59",
+      "spuLimit": {"ruleType": 1, "rule": "", "cycle": 0, "limitCount": -1, "baseCount": 1, "limitSingle": -1},
+      "skuList": [{"skuId": 17787, "points": "800", "price": "0", "extTradePrice": "21.9"}]
+    }
+  ]
+}

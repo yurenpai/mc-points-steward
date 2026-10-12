@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>麦享掌柜 · mc-points-steward — 积分资产管家（在线演示）</title>
+<meta name="description" content="麦当劳中国 MCP 开发者创新大赛参赛作品。查得清账、剔得掉假、算得出值、守得住手。">
+<style>
+  :root {
+    --red: #993C1D; --red-bright: #DA291C; --yellow: #FFC72C;
+    --ink: #26215C; --text: #2C2C2A; --sub: #888780;
+    --line: #E4E1D8; --card: #FAF6EF; --bg: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+                 'Microsoft YaHei', sans-serif;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  header { border-bottom: 3px solid var(--yellow); padding-bottom: 24px; margin-bottom: 32px; }
+  h1 { font-size: 30px; margin: 0 0 8px; color: var(--ink); }
+  .tagline { color: var(--sub); font-size: 15px; margin: 0; }
+  .badges { margin-top: 14px; }
+  .badge {
+    display: inline-block; font-size: 12px; padding: 3px 10px; margin-right: 8px;
+    border-radius: 999px; background: var(--card); color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  h2 { font-size: 20px; color: var(--ink); margin: 44px 0 6px; }
+  h2 .num { color: var(--red); font-variant-numeric: tabular-nums; margin-right: 8px; }
+  .hint { color: var(--sub); font-size: 13.5px; margin: 0 0 18px; }
+  .card-svg { margin: 24px 0 8px; }
+  .card-svg svg { display: block; width: 100%; height: auto;
+                  border: 1px solid var(--line); border-radius: 10px; }
+  .banner-svg { margin: 0 0 28px; }
+  .banner-svg svg { display: block; width: 100%; height: auto;
+                    border-radius: 10px; box-shadow: 0 2px 14px rgba(26,13,8,.18); }
+  figure { margin: 24px 0; }
+  figure img { width: 100%; border: 1px solid var(--line); border-radius: 10px; }
+  figcaption { color: var(--sub); font-size: 12.5px; text-align: center; margin-top: 8px; }
+  pre {
+    background: #1E1D26; color: #E8E6DF; border-radius: 10px;
+    padding: 18px 20px; overflow-x: auto; font-size: 13px; line-height: 1.55;
+    font-family: 'DengXian', 'Consolas', 'SF Mono', Menlo, monospace;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+  th { color: var(--ink); font-weight: 600; background: var(--card); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .warn { color: var(--red-bright); font-weight: 600; }
+  .ok { color: #2F6B3C; font-weight: 600; }
+  .note {
+    background: var(--card); border-left: 4px solid var(--yellow);
+    padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 14px; margin: 20px 0;
+  }
+  code { background: var(--card); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  pre code { background: none; padding: 0; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+           color: var(--sub); font-size: 12.5px; }
+  a { color: var(--red); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>麦享掌柜 · mc-points-steward</h1>
+  <p class="tagline">一个替你打理麦当劳积分资产的 WorkBuddy Skill ——
+     <strong>查得清账、剔得掉假、算得出值、守得住手</strong>。</p>
+  <div class="badges">
+    <span class="badge">麦当劳中国 MCP 开发者创新大赛</span>
+    <span class="badge">WorkBuddy Skill</span>
+    <span class="badge">纯 Python 标准库</span>
+    <span class="badge">MIT</span>
+  </div>
+</header>
+
+<div class="banner-svg">
+<svg viewBox="0 0 680 300" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<title>麦享掌柜 mc-points-steward — 麦当劳积分资产管家</title>
+<desc>2026-10-12 麦当劳官方 MCP 实测：标称上架的积分类商品中 18 件名存实亡（假上架率 67%）；9 件真可兑中 9 件需到店另付现金，纯积分白拿 0 件；默认查询漏报 2 件。</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0d08"/><stop offset="55%" stop-color="#2b1108"/><stop offset="100%" stop-color="#140806"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#FFC72C"/><stop offset="100%" stop-color="#FF8A00"/></linearGradient>
+<filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur in="SourceAlpha" stdDeviation="7" result="b"/><feFlood flood-color="#FFB020" flood-opacity="0.5" result="c"/><feComposite in="c" in2="b" operator="in" result="halo"/><feMerge><feMergeNode in="halo"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="680" height="300" fill="url(#bg)"/>
+<circle cx="30" cy="300" r="150" fill="#FFC72C" opacity="0.07"/>
+<circle cx="680" cy="24" r="170" fill="#DA291C" opacity="0.12"/>
+<g filter="url(#glow)" transform="translate(46,68) scale(0.86)">
+<path d="M 10 92 C 10 22 26 10 42 10 C 54 10 58 24 60 50 C 62 24 66 10 78 10 C 94 10 110 22 110 92" fill="none" stroke="#FFC72C" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="190" y="92" font-size="40" fill="#FFFFFF" font-weight="700" letter-spacing="4">麦享掌柜</text>
+<text x="192" y="118" font-size="14" fill="#FFC72C" letter-spacing="1.5" font-family="'Menlo','Consolas',monospace">mc-points-steward</text>
+<rect x="192" y="132" width="120" height="3.5" rx="1.75" fill="url(#gold)"/>
+<text x="190" y="160" font-size="15" fill="#F2E6D8">别的工具帮你点这一单，</text>
+<text x="190" y="182" font-size="15" fill="#F2E6D8">我们帮你守住积分资产。</text>
+<text x="190" y="206" font-size="10.5" fill="#B8A88F" letter-spacing="1">麦当劳中国 MCP 开发者创新大赛 · 参赛作品</text>
+<rect x="24" y="230" width="202" height="48" rx="10" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFC72C" stroke-opacity="0.28"/>
+<text x="38" y="252" font-size="19" fill="#FFC72C" font-weight="700">67%</text>
+<text x="38" y="269" font-size="10" fill="#F2E6D8">假上架率</text>
+<text x="212" y="252" font-size="11" fill="#B8A88F" text-anchor="end">· 18</text>
+<text x="212" y="268" font-size="9.5" fill="#B8A88F" text-anchor="end">件名存实亡</text>
+<rect x="238" y="230" width="202" height="48" rx="10" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFC72C" stroke-opacity="0.28"/>
+<text x="252" y="252" font-size="19" fill="#FFC72C" font-weight="700">0 件</text>
+<text x="252" y="269" font-size="10" fill="#F2E6D8">纯积分白拿</text>
+<text x="426" y="252" font-size="11" fill="#B8A88F" text-anchor="end">· 9</text>
+<text x="426" y="268" font-size="9.5" fill="#B8A88F" text-anchor="end">件需到店另付</text>
+<rect x="452" y="230" width="202" height="48" rx="10" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFC72C" stroke-opacity="0.28"/>
+<text x="466" y="252" font-size="19" fill="#FFC72C" font-weight="700">2 件</text>
+<text x="466" y="269" font-size="10" fill="#F2E6D8">默认查询漏报</text>
+<text x="640" y="252" font-size="11" fill="#B8A88F" text-anchor="end">· 27</text>
+<text x="640" y="268" font-size="9.5" fill="#B8A88F" text-anchor="end">件标称上架</text>
+</svg>
+
+</div>
+
+<div class="note">
+  <strong>本页是什么：</strong>这是作品的<strong>离线在线演示</strong>——
+  所有数字来自 2026-10-12 对麦当劳官方 MCP 的真实调用快照，
+  由脚本自动渲染，<strong>无需 Token、无需安装</strong>即可看到完整效果。
+  真实使用时连接 <code>mcd-mcp</code> 即可获取实时数据。
+</div>
+
+<h2><span class="num">01</span>一图看懂：积分资产体检报告</h2>
+<p class="hint">这张图不是手工绘制的，是 <code>make_report_svg.py</code> 从真实调用快照实算生成。</p>
+<div class="card-svg">
+<svg viewBox="0 0 680 690" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<title>麦享掌柜 · 积分资产体检报告</title>
+<desc>2026-10-12 麦当劳官方 MCP 实测：27 件标称上架的积分类商品中，仅 9 件真能兑换，且全部需要到店另付现金。</desc>
+<rect x="0" y="0" width="680" height="690" rx="0" fill="#FFFFFF"/>
+<g transform="translate(24,15) scale(0.2)"><path d="M 10 92 C 10 22 26 10 42 10 C 54 10 58 24 60 50 C 62 24 66 10 78 10 C 94 10 110 22 110 92" fill="none" stroke="#DA291C" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="56" y="34" font-size="17" fill="#26215C" font-weight="600">麦享掌柜 · 积分资产体检报告</text>
+<text x="56" y="54" font-size="11" fill="#888780">麦当劳中国 MCP 实测 · 2026-10-12 快照 · 数据非手抄，由 fixtures 实算生成</text>
+<rect x="24" y="64" width="632" height="3" rx="1.5" fill="#FFC72C"/>
+<rect x="24" y="92" width="149" height="86" rx="8" fill="#FAF6EF"/>
+<text x="36" y="114" font-size="11" fill="#888780">每 100 积分现值</text>
+<text x="36" y="144" font-size="22" fill="#993C1D" font-weight="600">¥13.79</text>
+<text x="36" y="164" font-size="10" fill="#888780">按最优出口折算</text>
+<rect x="185" y="92" width="149" height="86" rx="8" fill="#FAF6EF"/>
+<text x="197" y="114" font-size="11" fill="#888780">真可兑商品</text>
+<text x="197" y="144" font-size="22" fill="#2F6B3C" font-weight="600">9 件</text>
+<text x="197" y="164" font-size="10" fill="#888780">标称上架 27 件</text>
+<rect x="346" y="92" width="149" height="86" rx="8" fill="#FAF6EF"/>
+<text x="358" y="114" font-size="11" fill="#888780">假上架（名存实亡）</text>
+<text x="358" y="144" font-size="22" fill="#DA291C" font-weight="600">18 件</text>
+<text x="358" y="164" font-size="10" fill="#888780">占比 67%</text>
+<rect x="507" y="92" width="149" height="86" rx="8" fill="#FAF6EF"/>
+<text x="519" y="114" font-size="11" fill="#888780">纯积分白拿</text>
+<text x="519" y="144" font-size="22" fill="#DA291C" font-weight="600">0 件</text>
+<text x="519" y="164" font-size="10" fill="#888780">到店都要另付钱</text>
+<text x="24" y="202" font-size="14" fill="#26215C" font-weight="600">三个反直觉结论</text>
+<rect x="24" y="218" width="632" height="58" rx="8" fill="#FDF0E7"/>
+<circle cx="44" cy="247" r="11" fill="#993C1D"/>
+<text x="44" y="251" font-size="12" fill="#FFFFFF" font-weight="600" text-anchor="middle">1</text>
+<text x="64" y="240" font-size="12.5" fill="#993C1D" font-weight="600">货架上 67% 是假的</text>
+<text x="64" y="259" font-size="11" fill="#2C2C2A">27 件标着 status=2「已上架」，其中 18 件的下架时间早已过去 —— 名存实亡。</text>
+<rect x="24" y="284" width="632" height="58" rx="8" fill="#FDF0E7"/>
+<circle cx="44" cy="313" r="11" fill="#993C1D"/>
+<text x="44" y="317" font-size="12" fill="#FFFFFF" font-weight="600" text-anchor="middle">2</text>
+<text x="64" y="306" font-size="12.5" fill="#993C1D" font-weight="600">没有一件能「白拿」</text>
+<text x="64" y="325" font-size="11" fill="#2C2C2A">9 件真可兑，9 件需到店另付现金（¥3.9 ~ ¥21.9）。「100 分换冰淇淋」实为 100 分 + 3.9 元。</text>
+<rect x="24" y="350" width="632" height="58" rx="8" fill="#FDF0E7"/>
+<circle cx="44" cy="379" r="11" fill="#993C1D"/>
+<text x="44" y="383" font-size="12" fill="#FFFFFF" font-weight="600" text-anchor="middle">3</text>
+<text x="64" y="372" font-size="12.5" fill="#993C1D" font-weight="600">默认查询会漏货</text>
+<text x="64" y="391" font-size="11" fill="#2C2C2A">不传 catRuleIds 时接口少返回 2 件真能兑的商品 —— 漏报率 22%。</text>
+<text x="24" y="428" font-size="14" fill="#26215C" font-weight="600">同一张货架，性价比差 5.04 倍</text>
+<text x="24" y="446" font-size="11" fill="#888780">按「分/元」升序，条越短越划算；每件都标出到店另付现金</text>
+<text x="24" y="468" font-size="10" fill="#888780">商品</text>
+<text x="175" y="468" font-size="10" fill="#888780" text-anchor="end">积分</text>
+<text x="195" y="468" font-size="10" fill="#888780">性价比（分/元）</text>
+<text x="656" y="468" font-size="10" fill="#888780" text-anchor="end">到店另付</text>
+<line x1="24" y1="475" x2="656" y2="475" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="24" y="494" font-size="11.5" fill="#2C2C2A">6.9元可乐麦炫酷</text>
+<text x="175" y="494" font-size="11.5" fill="#444441" text-anchor="end">50</text>
+<rect x="195" y="485" width="51" height="12" rx="3" fill="#F0997B"/>
+<text x="467" y="494" font-size="11.5" fill="#2C2C2A">7.25</text>
+<text x="656" y="494" font-size="11.5" fill="#993C1D" text-anchor="end">¥6.9</text>
+<text x="24" y="522" font-size="11.5" fill="#2C2C2A">6.9元香芋派/菠萝</text>
+<text x="175" y="522" font-size="11.5" fill="#444441" text-anchor="end">50</text>
+<rect x="195" y="513" width="51" height="12" rx="3" fill="#F0997B"/>
+<text x="467" y="522" font-size="11.5" fill="#2C2C2A">7.25</text>
+<text x="656" y="522" font-size="11.5" fill="#993C1D" text-anchor="end">¥6.9</text>
+<text x="24" y="550" font-size="11.5" fill="#2C2C2A">10.9元指定小食任</text>
+<text x="175" y="550" font-size="11.5" fill="#444441" text-anchor="end">100</text>
+<rect x="195" y="541" width="65" height="12" rx="3" fill="#F0997B"/>
+<text x="467" y="550" font-size="11.5" fill="#2C2C2A">9.17</text>
+<text x="656" y="550" font-size="11.5" fill="#993C1D" text-anchor="end">¥10.9</text>
+<text x="24" y="578" font-size="11.5" fill="#2C2C2A">21.9元巨无霸可乐</text>
+<text x="175" y="578" font-size="11.5" fill="#444441" text-anchor="end">800</text>
+<rect x="195" y="569" width="260" height="12" rx="3" fill="#993C1D"/>
+<text x="467" y="578" font-size="11.5" fill="#2C2C2A">36.53</text>
+<text x="656" y="578" font-size="11.5" fill="#993C1D" text-anchor="end">¥21.9</text>
+<line x1="24" y1="612" x2="656" y2="612" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="24" y="632" font-size="10.5" fill="#888780">口径：性价比 = 所需积分 ÷ 券面价（到店核销价）。MCP 不提供商品原价，故不计折扣率。</text>
+<text x="24" y="648" font-size="10.5" fill="#888780">资产现值 = 可用积分 ÷ 最优出口汇率（7.25 分/元，最优出口「6.9元可乐麦炫酷」）。</text>
+<text x="24" y="664" font-size="10.5" fill="#888780">本图由 make_report_svg.py 从真实调用快照自动生成 · 麦享掌柜 mc-points-steward · MIT</text>
+<rect x="0" y="684" width="140" height="6" rx="0" fill="#DA291C"/>
+<rect x="140" y="684" width="540" height="6" rx="0" fill="#FFC72C"/>
+</svg>
+</div>
+
+<h2><span class="num">02</span>动态演示：完整跑一遍</h2>
+<p class="hint">终端风录屏，文字与 <code>python scripts/demo.py</code> 实际输出逐字一致。</p>
+<figure>
+  <img src="assets/demo.gif" alt="麦享掌柜离线演示：积分账本、真实可兑榜单、抽奖参谋">
+  <figcaption>离线演示 · 数据快照 2026-10-12 · 账户 ID 已脱敏</figcaption>
+</figure>
+
+<h2><span class="num">03</span>三段输出原文</h2>
+<p class="hint">与 Skill 真实运行时的输出格式完全一致（此处为离线快照）。</p>
+
+<h2 style="font-size:16px;margin-top:28px">W1 · 积分账本</h2>
+<pre>
+╔══════════════════════════════════╗
+║  |\/|  麦享掌柜                  ║
+║  |/\|  积分资产管家              ║
+╚══════════════════════════════════╝
+  本演示使用仓库内数据快照（2026-10-12 真实调用），
+  无需麦当劳 MCP Token 即可复现 Skill 的完整输出效果。
+  账户 ID 已脱敏。实际使用时请连接 mcd-mcp 获取实时数据。
+
+──────────────────────────────────
+  麦享掌柜 · 积分账本（W1）
+──────────────────────────────────
+  可用积分      0 分
+  ── 来龙去脉 ─────────────────────────
+  累计获得      0 分
+  已使用        0 分
+  已过期        0 分
+  冻结中        0 分
+  ── 到期提醒 ─────────────────────────
+  本月将过期    0 分
+  下月将过期    0 分
+  上月已过期    0 分
+──────────────────────────────────
+  掌柜批注
+  账上是空的。这不要紧——眼下商城
+  真能兑的有 9 件（见下一段），攒够就开张。
+
+  三条攒分路子（客观列出，不催你）：
+   ① 消费累积 —— 每笔订单自动计分
+   ② 抽奖回血 —— 24 分/次，奖池含
+      「30 积分」，理论上能滚起来
+   ③ 活动赠送 —— 麦金学期卡学生
+      49 元/150 天，赠多邻国月卡
+──────────────────────────────────
+  ── 资产现值 ─────────────────────────
+  按最优出口折算（6.9元可乐麦炫酷，50 分）：
+  每 100 积分现值 ¥13.79
+  ⚠️ 但每件都要到店另付现金（见下一段）
+──────────────────────────────────
+  账户 02007421*****************7704 · 麦享会积分
+
+──────────────────────────────────
+  数据来源 tests/fixtures/：account_20261012.json ·
+  mall_products_cat_1_4_20261012.json ·
+  mall_products_cat_2_8_20261012.json ·
+  mall_products_20261012.json（默认查询，用于对比漏报）·
+  lottery_info_20261012.json
+──────────────────────────────────
+</pre>
+
+<h2 style="font-size:16px;margin-top:28px">W2 · 积分商城真实可兑榜单</h2>
+<pre>
+╔══════════════════════════════════╗
+║  |\/|  麦享掌柜                  ║
+║  |/\|  积分资产管家              ║
+╚══════════════════════════════════╝
+  本演示使用仓库内数据快照（2026-10-12 真实调用），
+  无需麦当劳 MCP Token 即可复现 Skill 的完整输出效果。
+  账户 ID 已脱敏。实际使用时请连接 mcd-mcp 获取实时数据。
+
+──────────────────────────────────
+  积分商城 · 真实可兑榜单（W2）
+──────────────────────────────────
+  27 件在售 → 去伪后 9 件真可兑
+  ⚠️ 默认查询漏报 2 件，已按类目补回：
+     + 16.9元2份麦辣鸡翅       200 分
+     + 3.9元圆筒冰淇淋         100 分
+
+  ⚪ 普通
+  6.9元可乐麦炫酷        50分 7.25 分/元
+       └ 2026-12-30 23:59:59 下架 · 还差 50 分 · 到店另付 ¥6.9
+  6.9元香芋派/菠萝派任选 50分 7.25 分/元
+       └ 2026-12-30 23:59:59 下架 · 还差 50 分 · 到店另付 ¥6.9
+  10.9元指定小食任选     100分 9.17 分/元 ⚠️同名
+       └ 2026-12-30 23:59:59 下架 · 还差 100 分 · 到店另付 ¥10.9
+  16.9元2份麦辣鸡翅      200分 11.83 分/元
+       └ 2026-12-30 23:59:59 下架 · 还差 200 分 · 到店另付 ¥16.9
+  10.9元指定小食任选     200分 18.35 分/元 ⚠️同名
+       └ 2026-12-30 23:59:59 下架 · 还差 200 分 · 到店另付 ¥10.9
+  3.9元圆筒冰淇淋        100分 25.64 分/元
+       └ 2026-12-30 23:59:59 下架 · 还差 100 分 · 到店另付 ¥3.9
+  🔷 稀有
+  17.9元板烧可乐组合     500分 27.93 分/元
+       └ 2026-12-30 23:59:59 下架 · 还差 500 分 · 到店另付 ¥17.9
+  16.9元麦辣可乐组合     500分 29.59 分/元
+       └ 2026-12-30 23:59:59 下架 · 还差 500 分 · 到店另付 ¥16.9
+  21.9元巨无霸可乐组合   800分 36.53 分/元
+       └ 2026-12-30 23:59:59 下架 · 还差 800 分 · 到店另付 ¥21.9
+
+  ── 隐藏现金成本 ───────────────────────
+  🔴 真可兑 9 件 → 9 件需到店另付现金，纯积分白拿 0 件
+     另付区间 ¥3.9 ~ ¥21.9
+     这笔钱不在列表接口里（extTradePrice 只在详情中），
+     只看列表就推荐 = 告诉用户「100 分白拿冰淇淋」，其实是 100 分 + 3.9 元。
+
+  ── 同名陷阱 1 组 ─────────────────────
+  ⚠️ 10.9元指定小食任选
+     100 分 · 另付 ¥10.9 · 中薯条/奥利奥麦旋风 任选1件
+     200 分 · 另付 ¥10.9 · 麦乐鸡-4块/麦辣鸡翅-2块/那么大鸡排（椒盐风味）任选1件
+     → 同名不同物，不是谁更贵的问题，按想吃什么选
+
+  ── 已剔除 18 件 ─────────────────────
+  名存实亡 18 件（标 status=2 上架，实则已过期）
+    ☠️ Nike Book 2 麦当劳特别联名款  8888 分
+       下架于 2026-06-05 16:00:00
+    ☠️ 罗技键鼠套装              6666 分
+       下架于 2026-08-21 23:59:59
+    ☠️ 28.9元板烧四件套          800 分
+       下架于 2026-06-24 23:59:59
+    …… 其余 15 件见图鉴 · 绝版栏
+  现金商品 0 件（point=0，派对/品鉴会/体验营）
+──────────────────────────────────
+  图鉴进度   金拱门限定 0 / 9
+  已绝版收藏 18 件
+  限时掉落   当前无
+──────────────────────────────────
+  注：市价由商品名解析（price 字段对积分商品恒为 0）
+
+──────────────────────────────────
+  数据来源 tests/fixtures/：account_20261012.json ·
+  mall_products_cat_1_4_20261012.json ·
+  mall_products_cat_2_8_20261012.json ·
+  mall_products_20261012.json（默认查询，用于对比漏报）·
+  lottery_info_20261012.json
+──────────────────────────────────
+</pre>
+
+<h2 style="font-size:16px;margin-top:28px">W3 · 积分抽奖参谋</h2>
+<pre>
+╔══════════════════════════════════╗
+║  |\/|  麦享掌柜                  ║
+║  |/\|  积分资产管家              ║
+╚══════════════════════════════════╝
+  本演示使用仓库内数据快照（2026-10-12 真实调用），
+  无需麦当劳 MCP Token 即可复现 Skill 的完整输出效果。
+  账户 ID 已脱敏。实际使用时请连接 mcd-mcp 获取实时数据。
+
+──────────────────────────────────
+  积分抽奖 · 参谋（W3）
+──────────────────────────────────
+  麦麦积分抽奖
+  状态 进行中 · 至 2030-12-31
+  单次消耗 24 积分 · 你的可用 0 分
+
+  ── 奖池 10 品 ──────────────────────
+    · 下单立减3元券           [优惠券]
+    · 下单立减2元券           [优惠券]
+    · 下单立减1元券           [优惠券]
+    · 麦辣三件套5折券         [优惠券]
+    · 板烧三件套5折券         [优惠券]
+    · 双层鳕鱼三件套6折券     [优惠券]
+    · 甜辣小食组合5折券       [优惠券]
+    · 小食四件套5.5折券       [优惠券]
+    · 麦旋风5折券             [优惠券]
+    · 30积分                  [积分奖]
+
+  ── 资格判定 ─────────────────────────
+  ⛔ 暂不可抽 —— 积分不足
+  （资格只信 drawDecision，不由积分余额自行推断）
+──────────────────────────────────
+  掌柜批注：奖池 10 品中仅 1 品为积分（30 积分），
+  其余 9 品为优惠券。24 分换 30 分是唯一「回血」路径，
+  但命中率未知——是否要抽，你拍板。
+
+──────────────────────────────────
+  数据来源 tests/fixtures/：account_20261012.json ·
+  mall_products_cat_1_4_20261012.json ·
+  mall_products_cat_2_8_20261012.json ·
+  mall_products_20261012.json（默认查询，用于对比漏报）·
+  lottery_info_20261012.json
+──────────────────────────────────
+</pre>
+
+<h2><span class="num">04</span>它挖出了三个官方接口不会告诉你的问题</h2>
+<table>
+  <tr><th>问题</th><th>实测结论</th><th>后果</th></tr>
+  <tr>
+    <td><strong>假上架</strong></td>
+    <td>27 件标 <code>status=2</code> 的积分类商品中，<span class="warn">18 件</span>的下架时间早已过去</td>
+    <td>货架 67% 是名存实亡的</td>
+  </tr>
+  <tr>
+    <td><strong>隐藏现金成本</strong></td>
+    <td>9 件真可兑商品，<span class="warn">0 件</span>是纯积分白拿（<code>extTradePrice</code> 只在详情接口）</td>
+    <td>「100 分换冰淇淋」实为 100 分 + ¥3.9</td>
+  </tr>
+  <tr>
+    <td><strong>默认查询漏报</strong></td>
+    <td>不传 <code>catRuleIds</code> 会少返回 <span class="warn">2 件</span>真能兑的商品</td>
+    <td>漏报率 22%</td>
+  </tr>
+</table>
+
+<h2><span class="num">05</span>安全边界</h2>
+<p>涉及不可逆操作（兑换下单 <code>mall-create-order</code>、抽奖 <code>draw-lottery</code>）时，
+Skill 一定先把<strong>商品名、积分、有效期、到店另付金额</strong>摆出来，
+等你明确说「确认」才动手。资格判定只信官方的 <code>drawDecision</code>，
+不由积分余额自行推断。</p>
+
+<footer>
+  <p>数据来源：麦当劳中国 MCP（<code>mcp.mcd.cn</code>）真实调用快照，2026-10-12。<br>
+  本页由 <code>make_demo_page.py</code> 自动生成 · 麦享掌柜 mc-points-steward · MIT License ·
+  非麦当劳官方产品。</p>
+</footer>
+
+</div>
+</body>
+</html>

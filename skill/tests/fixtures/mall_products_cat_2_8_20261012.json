@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "_comment": "mall-points-products 真实返回快照（catRuleIds=2>8 周边产品）。已脱敏。三件全部 downTime 早于采集时间，即 100% 名存实亡。",
+    "tool": "mall-points-products",
+    "params": { "catRuleIds": "2>8" },
+    "captured_at": "2026-10-12 16:07:33",
+    "count": 3
+  },
+  "data": [
+    {
+      "spuName": "罗技键鼠套装",
+      "spuId": 17694,
+      "point": "6666",
+      "selling": "积分兑大礼，罗技键鼠套装6666积分兑换！8月17日-8月21日，每日限量 5 份，先到先得",
+      "upTime": "2026-08-21 14:00:00",
+      "downTime": "2026-08-21 23:59:59",
+      "spuImage": "https://img.mcd.cn/ecs/b1830d7dc1ea9a89.jpg",
+      "shopId": 2,
+      "catName": "玩具",
+      "status": 2,
+      "price": "0"
+    },
+    {
+      "spuName": "Nike Book 2 麦当劳特别联名款",
+      "spuId": 16800,
+      "point": "8888",
+      "selling": "独一无二，梦幻联动，Nike Book 2 麦当劳特别联名款 每人限购一双，每日 14:00 准时开抢",
+      "upTime": "2026-06-05 14:00:00",
+      "downTime": "2026-06-05 16:00:00",
+      "spuImage": "https://img.mcd.cn/ecs/3d4d37c8feb04aab.jpg",
+      "shopId": 2,
+      "catName": "鞋袜",
+      "status": 2,
+      "price": "0"
+    },
+    {
+      "spuName": "酸黄瓜吧唧礼盒",
+      "spuId": 17643,
+      "point": "800",
+      "selling": "800 积分兑换酸黄瓜吧唧礼盒！ 8.12 限量 150 份｜8.13 限量 100 份｜8.14 限量 100 份，先兑先得",
+      "upTime": "2026-08-14 14:00:00",
+      "downTime": "2026-08-14 23:59:59",
+      "spuImage": "https://img.mcd.cn/ecs/b23170613362944d.jpg",
+      "shopId": 2,
+      "catName": "玩具",
+      "status": 2,
+      "price": "0"
+    }
+  ]
+}

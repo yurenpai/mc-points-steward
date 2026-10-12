@@ -1,0 +1,74 @@
+<svg viewBox="0 0 680 690" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<title>麦享掌柜 · 积分资产体检报告</title>
+<desc>2026-10-12 麦当劳官方 MCP 实测：27 件标称上架的积分类商品中，仅 9 件真能兑换，且全部需要到店另付现金。</desc>
+<rect x="0" y="0" width="680" height="690" rx="0" fill="#FFFFFF"/>
+<g transform="translate(24,15) scale(0.2)"><path d="M 10 92 C 10 22 26 10 42 10 C 54 10 58 24 60 50 C 62 24 66 10 78 10 C 94 10 110 22 110 92" fill="none" stroke="#DA291C" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="56" y="34" font-size="17" fill="#26215C" font-weight="600">麦享掌柜 · 积分资产体检报告</text>
+<text x="56" y="54" font-size="11" fill="#888780">麦当劳中国 MCP 实测 · 2026-10-12 快照 · 数据非手抄，由 fixtures 实算生成</text>
+<rect x="24" y="64" width="632" height="3" rx="1.5" fill="#FFC72C"/>
+<rect x="24" y="92" width="149" height="86" rx="8" fill="#FAF6EF"/>
+<text x="36" y="114" font-size="11" fill="#888780">每 100 积分现值</text>
+<text x="36" y="144" font-size="22" fill="#993C1D" font-weight="600">¥13.79</text>
+<text x="36" y="164" font-size="10" fill="#888780">按最优出口折算</text>
+<rect x="185" y="92" width="149" height="86" rx="8" fill="#FAF6EF"/>
+<text x="197" y="114" font-size="11" fill="#888780">真可兑商品</text>
+<text x="197" y="144" font-size="22" fill="#2F6B3C" font-weight="600">9 件</text>
+<text x="197" y="164" font-size="10" fill="#888780">标称上架 27 件</text>
+<rect x="346" y="92" width="149" height="86" rx="8" fill="#FAF6EF"/>
+<text x="358" y="114" font-size="11" fill="#888780">假上架（名存实亡）</text>
+<text x="358" y="144" font-size="22" fill="#DA291C" font-weight="600">18 件</text>
+<text x="358" y="164" font-size="10" fill="#888780">占比 67%</text>
+<rect x="507" y="92" width="149" height="86" rx="8" fill="#FAF6EF"/>
+<text x="519" y="114" font-size="11" fill="#888780">纯积分白拿</text>
+<text x="519" y="144" font-size="22" fill="#DA291C" font-weight="600">0 件</text>
+<text x="519" y="164" font-size="10" fill="#888780">到店都要另付钱</text>
+<text x="24" y="202" font-size="14" fill="#26215C" font-weight="600">三个反直觉结论</text>
+<rect x="24" y="218" width="632" height="58" rx="8" fill="#FDF0E7"/>
+<circle cx="44" cy="247" r="11" fill="#993C1D"/>
+<text x="44" y="251" font-size="12" fill="#FFFFFF" font-weight="600" text-anchor="middle">1</text>
+<text x="64" y="240" font-size="12.5" fill="#993C1D" font-weight="600">货架上 67% 是假的</text>
+<text x="64" y="259" font-size="11" fill="#2C2C2A">27 件标着 status=2「已上架」，其中 18 件的下架时间早已过去 —— 名存实亡。</text>
+<rect x="24" y="284" width="632" height="58" rx="8" fill="#FDF0E7"/>
+<circle cx="44" cy="313" r="11" fill="#993C1D"/>
+<text x="44" y="317" font-size="12" fill="#FFFFFF" font-weight="600" text-anchor="middle">2</text>
+<text x="64" y="306" font-size="12.5" fill="#993C1D" font-weight="600">没有一件能「白拿」</text>
+<text x="64" y="325" font-size="11" fill="#2C2C2A">9 件真可兑，9 件需到店另付现金（¥3.9 ~ ¥21.9）。「100 分换冰淇淋」实为 100 分 + 3.9 元。</text>
+<rect x="24" y="350" width="632" height="58" rx="8" fill="#FDF0E7"/>
+<circle cx="44" cy="379" r="11" fill="#993C1D"/>
+<text x="44" y="383" font-size="12" fill="#FFFFFF" font-weight="600" text-anchor="middle">3</text>
+<text x="64" y="372" font-size="12.5" fill="#993C1D" font-weight="600">默认查询会漏货</text>
+<text x="64" y="391" font-size="11" fill="#2C2C2A">不传 catRuleIds 时接口少返回 2 件真能兑的商品 —— 漏报率 22%。</text>
+<text x="24" y="428" font-size="14" fill="#26215C" font-weight="600">同一张货架，性价比差 5.04 倍</text>
+<text x="24" y="446" font-size="11" fill="#888780">按「分/元」升序，条越短越划算；每件都标出到店另付现金</text>
+<text x="24" y="468" font-size="10" fill="#888780">商品</text>
+<text x="175" y="468" font-size="10" fill="#888780" text-anchor="end">积分</text>
+<text x="195" y="468" font-size="10" fill="#888780">性价比（分/元）</text>
+<text x="656" y="468" font-size="10" fill="#888780" text-anchor="end">到店另付</text>
+<line x1="24" y1="475" x2="656" y2="475" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="24" y="494" font-size="11.5" fill="#2C2C2A">6.9元可乐麦炫酷</text>
+<text x="175" y="494" font-size="11.5" fill="#444441" text-anchor="end">50</text>
+<rect x="195" y="485" width="51" height="12" rx="3" fill="#F0997B"/>
+<text x="467" y="494" font-size="11.5" fill="#2C2C2A">7.25</text>
+<text x="656" y="494" font-size="11.5" fill="#993C1D" text-anchor="end">¥6.9</text>
+<text x="24" y="522" font-size="11.5" fill="#2C2C2A">6.9元香芋派/菠萝</text>
+<text x="175" y="522" font-size="11.5" fill="#444441" text-anchor="end">50</text>
+<rect x="195" y="513" width="51" height="12" rx="3" fill="#F0997B"/>
+<text x="467" y="522" font-size="11.5" fill="#2C2C2A">7.25</text>
+<text x="656" y="522" font-size="11.5" fill="#993C1D" text-anchor="end">¥6.9</text>
+<text x="24" y="550" font-size="11.5" fill="#2C2C2A">10.9元指定小食任</text>
+<text x="175" y="550" font-size="11.5" fill="#444441" text-anchor="end">100</text>
+<rect x="195" y="541" width="65" height="12" rx="3" fill="#F0997B"/>
+<text x="467" y="550" font-size="11.5" fill="#2C2C2A">9.17</text>
+<text x="656" y="550" font-size="11.5" fill="#993C1D" text-anchor="end">¥10.9</text>
+<text x="24" y="578" font-size="11.5" fill="#2C2C2A">21.9元巨无霸可乐</text>
+<text x="175" y="578" font-size="11.5" fill="#444441" text-anchor="end">800</text>
+<rect x="195" y="569" width="260" height="12" rx="3" fill="#993C1D"/>
+<text x="467" y="578" font-size="11.5" fill="#2C2C2A">36.53</text>
+<text x="656" y="578" font-size="11.5" fill="#993C1D" text-anchor="end">¥21.9</text>
+<line x1="24" y1="612" x2="656" y2="612" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="24" y="632" font-size="10.5" fill="#888780">口径：性价比 = 所需积分 ÷ 券面价（到店核销价）。MCP 不提供商品原价，故不计折扣率。</text>
+<text x="24" y="648" font-size="10.5" fill="#888780">资产现值 = 可用积分 ÷ 最优出口汇率（7.25 分/元，最优出口「6.9元可乐麦炫酷」）。</text>
+<text x="24" y="664" font-size="10.5" fill="#888780">本图由 make_report_svg.py 从真实调用快照自动生成 · 麦享掌柜 mc-points-steward · MIT</text>
+<rect x="0" y="684" width="140" height="6" rx="0" fill="#DA291C"/>
+<rect x="140" y="684" width="540" height="6" rx="0" fill="#FFC72C"/>
+</svg>
