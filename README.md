@@ -7,7 +7,7 @@
 
 [![MCP](https://img.shields.io/badge/MCP-mcd--mcp-ffc72c)](https://open.mcd.cn/mcp/doc)
 [![Skill](https://img.shields.io/badge/WorkBuddy-Skill-0052d9)](https://www.workbuddy.cn)
-[![Tests](https://img.shields.io/badge/tests-243%20passing-brightgreen)](skill/tests/)
+[![Tests](https://github.com/yurenpai/mc-points-steward/actions/workflows/verify.yml/badge.svg)](https://github.com/yurenpai/mc-points-steward/actions/workflows/verify.yml)
 [![Python](https://img.shields.io/badge/python-3.8%2B%20stdlib%20only-blue)](skill/scripts/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
@@ -269,6 +269,9 @@ mc-points-steward/
 ├── mcp-config.example.json    参赛必交：脱敏配置示例
 ├── workbuddy.md               参赛必交：WorkBuddy 开发实录
 ├── LICENSE                    MIT
+├── .github/
+│   └── workflows/
+│       └── verify.yml         CI：每次推送自动跑四层自检（顶部徽章实时反映状态）
 ├── docs/
 │   └── index.html             在线演示页（自包含，可直接部署 GitHub Pages）
 ├── assets/
@@ -341,13 +344,18 @@ python tools/verify.py --only L1,L4    # 只查指定层
 python tools/verify.py --rebuild       # L4 先重建物料再检查
 ```
 
+本仓库已接入 GitHub Actions（`.github/workflows/verify.yml`）：每次推送自动跑四层自检，
+结果实时反映在 README 顶部的 Tests 徽章。
+
 **L3 的特殊性**：MCP 是 streamablehttp 长连接，由 WorkBuddy 客户端调度，
 脚本**不直连官方接口、不存 Token**。它负责快照老化体检（哪些商品临近下架、
 实时对账时该重点核谁），实时比对需在对话里执行四步——脚本末尾会打印。
 
 ## 运行测试
 
-**纯 Python 标准库，无需 pip install，无需 pytest。**
+**无需 pytest，测试脚本直接 `python tests/xxx.py` 运行。**
+Skill 本体（账本 / 去伪 / 排序 / 抽奖参谋）纯标准库零依赖；
+GIF 的生成与校验需要 Pillow（CI 环境会自动安装）。
 
 ```bash
 cd skill
@@ -369,6 +377,10 @@ python tests/test_install.py --install --smoke   # 27 ✓
 ## 离线演示
 
 无需 MCP Token 也能看到完整效果，数据来自 `tests/fixtures/` 下的真实调用快照：
+
+![终端演示动图](assets/demo.gif)
+
+*↑ 不是录屏——`make_demo_gif.py` 用 `demo.py` 的实跑输出逐帧合成，文字与真实输出逐字一致。*
 
 ```bash
 python skill/scripts/demo.py              # 三段全跑

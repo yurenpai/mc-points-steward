@@ -32,6 +32,9 @@ FONT_CANDIDATES = [
     "C:/Windows/Fonts/Deng.ttf",        # 等线（中英混排，Win10+ 自带）
     "C:/Windows/Fonts/msyh.ttc",        # 微软雅黑（兜底）
     "C:/Windows/Fonts/simhei.ttf",
+    # Linux（GitHub Actions CI：apt 安装 fonts-noto-cjk 后的两个常见落点）
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
 ]
 
 # 选行关键词：命中任一即保留该行（文字不改，只决定展示哪些行）。
