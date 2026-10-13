@@ -3,7 +3,6 @@
 > 一个替你打理麦当劳积分资产的 WorkBuddy Skill ——
 > **查得清账、剔得掉假、算得出值、守得住手**。
 >
-> 参赛作品 · [麦当劳中国 MCP 开发者创新大赛](https://github.com/M-China/mcd-developer-innovation-challenge)
 
 [![MCP](https://img.shields.io/badge/MCP-mcd--mcp-ffc72c)](https://open.mcd.cn/mcp/doc)
 [![Skill](https://img.shields.io/badge/WorkBuddy-Skill-0052d9)](https://www.workbuddy.cn)
