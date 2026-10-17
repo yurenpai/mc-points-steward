@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-make_points_ladder.py —— 合成「积分解锁天梯」宣传物料（GIF + SVG 双产物）。
+make_points_ladder.py —— 合成「积分解锁天梯」（GIF + SVG 双产物）。
 
 为什么这么做：
-    宣传的核心不是「我做了个 Skill」，而是「不同积分余额的人，拿到的是
+    核心不是「我做了个 Skill」，而是「不同积分余额的人，拿到的是
     完全不同的答案」。本项目 9 件真可兑商品的积分档位天然是
     50 / 100 / 200 / 500 / 800，加上抽奖门槛 24 分——一条「解锁天梯」
     直接从真实数据里长出来，不需要编。
@@ -494,7 +494,7 @@ def build_gif(data, out, scale=1.0):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="合成积分解锁天梯宣传物料")
+    ap = argparse.ArgumentParser(description="合成积分解锁天梯（GIF + SVG）")
     ap.add_argument("--out-gif", default=None, help="默认 <仓库根>/assets/points-ladder.gif")
     ap.add_argument("--out-svg", default=None, help="默认 <仓库根>/assets/points-ladder.svg")
     ap.add_argument("--scale", type=float, default=1.0, help="GIF 缩放，默认 1.0")

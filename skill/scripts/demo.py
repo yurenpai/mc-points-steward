@@ -90,14 +90,32 @@ def load_mall():
     return list(merged.values()), coverage
 
 
-def default_query_ids():
-    """默认查询（不传 catRuleIds）返回的商品 id 集合，用于算漏报。"""
+def _default_query_items():
     try:
         items, _ = load(DEFAULT_QUERY_FIXTURE)
         items = items if isinstance(items, list) else items.get("data", items)
-        return set(i.get("spuId") for i in items)
+        return items if isinstance(items, list) else []
     except Exception:
-        return set()
+        return []
+
+
+def default_query_ids():
+    """默认查询（不传 catRuleIds）返回的商品 id 集合，用于算漏报。"""
+    return set(i.get("spuId") for i in _default_query_items())
+
+
+def default_cash_count():
+    """默认查询里的现金商品件数（积分类目快照不含它们）。"""
+    n = 0
+    for it in _default_query_items():
+        try:
+            point = int(str(it.get("point", "")).strip() or "0")
+            price = float(str(it.get("price", "0")).strip() or 0)
+        except (TypeError, ValueError):
+            continue
+        if point == 0 and price > 0:
+            n += 1
+    return n
 
 
 DETAIL_FIXTURE = "mall_details_20261012.json"   # 真可兑 9 件详情（补出隐藏现金成本）
@@ -295,7 +313,12 @@ def sec_mall():
         L.append("       下架于 %s" % (r["downTime"] or "—"))
     if len(buckets["extinct"]) > 3:
         L.append("    …… 其余 %s 件见图鉴 · 绝版栏" % (len(buckets["extinct"]) - 3))
-    L.append("  现金商品 %s 件（point=0，派对/品鉴会/体验营）" % len(buckets["cash_only"]))
+    cash_here = len(buckets["cash_only"])
+    cash_default = default_cash_count()
+    if cash_here == 0 and cash_default:
+        L.append("  现金商品 本段未含（默认查询另有 %s 件，派对/品鉴会/体验营）" % cash_default)
+    else:
+        L.append("  现金商品 %s 件（point=0，派对/品鉴会/体验营）" % cash_here)
     if buckets["unknown_expiry"]:
         L.append("  时效未知 %s 件（缺 downTime，不臆断）" % len(buckets["unknown_expiry"]))
 
@@ -309,7 +332,7 @@ def sec_mall():
     else:
         L.append("  限时掉落   当前无")
     L.append("─" * W)
-    L.append("  注：市价由商品名解析（price 字段对积分商品恒为 0）")
+    L.append("  注：券面价由商品名解析（price 恒为 0，不是市价）")
     return "\n".join(L)
 
 

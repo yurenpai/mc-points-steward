@@ -19,7 +19,7 @@
 | 鉴权 | `Authorization: Bearer <TOKEN>` |
 | 限流 | 600 次/分钟/Token |
 | 工具总数 | 35（本机实测 `connection-ready tools:35`） |
-| 本项目实际使用 | **8 个** |
+| 本项目实际使用 | **10 个**（其中 2 个不可逆操作未实调） |
 
 配置示例见 [`mcp-config.example.json`](mcp-config.example.json)，**仅含环境变量占位符 `${MCD_MCP_TOKEN}`，不含真实凭证**。
 
@@ -98,8 +98,8 @@ scripts/rank_products.py
    ├─ 剔除现金商品   point == 0 且 price > 0    → cash_only
    ├─ 剔除假上架     status == 2 但 downTime < now → extinct
    ├─ 剔除售罄       status == 3                 → extinct
-   ├─ 解析市价       从 spuName 正则取「N元」      → market_price
-   ├─ 算性价比       point / market_price        → unit_price（分/元）
+   ├─ 解析券面价     从 spuName 正则取「N元」      → coupon_price
+   ├─ 算性价比       point / coupon_price        → unit_price（分/元）
    ├─ 临期分级       ≤7天 ⚠️ / ≤3天 🔴
    └─ 同名陷阱检测   同名但积分不同               → name_traps
         │
@@ -347,7 +347,7 @@ query-lottery-info  ──►  scripts/lottery_advice.py  ──►  Agent 做�
 | mcd-mcp 未接入/未授权 | 提示接入要点（Bearer 前缀），**绝不伪造数据** |
 | 商品列表返回空 | "商城当前无可兑商品"，不输出空榜 |
 | 缺 `downTime` | 归"时效未知"栏，不标临期 |
-| 缺市价 | 单列"无市价参考"，不填 0、不排名 |
+| 缺券面价 | 单列"无券面价参考"，不填 0、不排名 |
 | `drawDecision` 缺失 | 不推断资格，原样展示 + "以 App 页面为准" |
 | 下单/抽奖失败 | 原样转述错误，不重试、不猜测原因 |
 | 积分为 0 | 走「开张前夜」分支，给攒分路径，**严禁引导消费** |

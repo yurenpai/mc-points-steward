@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-make_promo_png.py —— 生成手机端宣传图（竖版 3:4 + 方版 1:1，PNG）。
+make_promo_png.py —— 生成手机端预览图（竖版 3:4 + 方版 1:1，PNG）。
 
 为什么需要它：
-    SVG 在微信朋友圈和小红书上都**无法直接显示**（两个平台都不认这个格式），
-    GIF 虽然是横版能发但信息流里偏小。宣传要发的是手机原生比例的位图。
-    本脚本产出两张 PNG，内容与 assets/points-ladder.{gif,svg} 同源：
+    README / Pages 上的 SVG、横版 GIF 在部分移动端预览不佳。
+    本脚本产出两张手机比例 PNG，内容与 assets/points-ladder.{gif,svg} 同源：
 
-      1. promo-vertical.png  1080x1440 —— 小红书主图（3:4）
-      2. promo-square.png    1080x1080 —— 朋友圈九宫格（1:1）
+      1. promo-vertical.png  1080x1440 —— 竖版预览（3:4）
+      2. promo-square.png    1080x1080 —— 方版预览（1:1）
 
 设计约束（与 make_points_ladder.py / make_banner_svg.py 同一套原则）：
     1. 数字零手抄 —— 档位分界、解锁件数、另付现金、奖池、现值、总结论
@@ -60,8 +59,8 @@ FONT_CANDIDATES = [
     "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
 ]
 
-VW, VH = 1080, 1440     # 竖版（小红书 3:4）
-SW, SH = 1080, 1080     # 方版（朋友圈 1:1）
+VW, VH = 1080, 1440     # 竖版 3:4
+SW, SH = 1080, 1080     # 方版 1:1
 MARGIN = 64             # 左右安全边距
 
 # 金拱门控制点（与 make_banner_svg.py 的 ARCH_PATH 对应）
@@ -321,7 +320,7 @@ def render_square(font_path, data, stats, out_path):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description="生成手机端宣传图（竖版 + 方版 PNG）")
+    ap = argparse.ArgumentParser(description="生成手机端预览图（竖版 + 方版 PNG）")
     ap.add_argument("--vertical-only", action="store_true", help="只出竖版")
     ap.add_argument("--square-only", action="store_true", help="只出方版")
     ap.add_argument("--out-vertical",

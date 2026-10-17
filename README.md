@@ -2,7 +2,10 @@
 
 > 一个替你打理麦当劳积分资产的 WorkBuddy Skill ——
 > **查得清账、剔得掉假、算得出值、守得住手**。
->
+
+**27 件积分类商品里，18 件是假上架；9 件真能兑的，没有一件是纯积分白拿。**
+
+[在线演示（无需 Token）](https://yurenpai.github.io/mc-points-steward/) · [30 秒离线体验](#快速开始)
 
 [![MCP](https://img.shields.io/badge/MCP-mcd--mcp-ffc72c)](https://open.mcd.cn/mcp/doc)
 [![Skill](https://img.shields.io/badge/WorkBuddy-Skill-0052d9)](https://www.workbuddy.cn)
@@ -14,13 +17,13 @@
 
 ![麦享掌柜 mc-points-steward — 麦当劳积分资产管家](assets/banner.svg)
 
-*↑ 横幅上的三个数字不是口号，是 `python skill/scripts/make_banner_svg.py` 从真实调用快照里算出来的。*
+*↑ 横幅数字来自真实调用快照实算，可复现。*
 
 ---
 
 ![积分资产体检报告卡](assets/report-card.svg)
 
-*↑ 这张图不是画的，是 `python skill/scripts/make_report_svg.py` 从真实调用快照里算出来自动生成的——每个数字都能复现。*
+*↑ 积分资产体检报告卡，数字与脚本输出同源。*
 
 ---
 
@@ -98,7 +101,30 @@
 
 ## 快速开始
 
-### 1. 配置 mcd-mcp 连接器
+### 1. 30 秒离线体验（无需 Token）
+
+```bash
+git clone https://github.com/yurenpai/mc-points-steward.git
+cd mc-points-steward
+python skill/scripts/demo.py
+```
+
+纯标准库、不联网。数据来自 `skill/tests/fixtures/` 下 2026-10-12 真实调用快照。  
+也可直接打开 [在线演示页](https://yurenpai.github.io/mc-points-steward/)。
+
+### 2. 安装 Skill
+
+把 `skill/` 整个目录放到 WorkBuddy 的 skills 目录下：
+
+```bash
+# 用户级（所有项目可用）
+cp -r skill/ ~/.workbuddy/skills/mc-points-steward/
+
+# 或用仓库自带的安装校验脚本（含冒烟测试）
+cd skill && python tests/test_install.py --install --smoke
+```
+
+### 3. 配置 mcd-mcp（拉取实时数据）
 
 在 WorkBuddy 中：左侧【专家·技能·连接器】→【连接器】→【自定义连接器】→【配置 MCP】。
 
@@ -121,19 +147,7 @@
 > ⚠️ **`Bearer ` 前缀必须有，且后面有一个空格。** 实测不带前缀会返回 `403 校验鉴权authToken必填`。
 > Token 获取：登录 [open.mcd.cn](https://open.mcd.cn) → 手机号验证 → 控制台 → 激活 → 复制。
 
-### 2. 安装 Skill
-
-把 `skill/` 整个目录放到 WorkBuddy 的 skills 目录下：
-
-```bash
-# 用户级（所有项目可用）
-cp -r skill/ ~/.workbuddy/skills/mc-points-steward/
-
-# 或用仓库自带的安装校验脚本（含冒烟测试）
-cd skill && python tests/test_install.py --install --smoke
-```
-
-### 3. 直接用
+### 4. 直接用
 
 > 我有多少积分？
 > 积分能换什么？哪个最划算？
@@ -275,13 +289,13 @@ mc-points-steward/
 │   └── index.html             在线演示页（自包含，可直接部署 GitHub Pages）
 ├── assets/
 │   ├── banner.svg            品牌横幅（深棕底 + 金拱门，README 首图）
-│   ├── report-card.svg        积分资产体检报告卡（可截图发群）
+│   ├── report-card.svg        积分资产体检报告卡
 │   ├── hidden-cost.svg        真可兑 9 件的隐藏现金成本图
 │   ├── points-ladder.svg      积分解锁天梯（静态版）
 │   ├── demo.gif               终端风演示动图（文字取自 demo.py 实跑）
 │   ├── points-ladder.gif      积分解锁天梯（动态版）
-│   ├── promo-vertical.png     小红书主图（1080×1440，数字全部实算）
-│   └── promo-square.png       朋友圈方图（1080×1080，数字全部实算）
+│   ├── promo-vertical.png     竖版预览图（1080×1440，数字全部实算）
+│   └── promo-square.png       方版预览图（1080×1080，数字全部实算）
 ├── skill/
 │   ├── SKILL.md               技能本体（工作流 / 数据陷阱 / 安全红线）
 │   ├── scripts/
@@ -291,6 +305,7 @@ mc-points-steward/
 │   │   ├── make_banner_svg.py 物料：生成品牌横幅 SVG（数字零手抄）
 │   │   ├── make_report_svg.py 物料：生成报告卡 SVG（数字零手抄）
 │   │   ├── make_points_ladder.py 物料：生成积分解锁天梯 GIF + SVG（数字零手抄）
+│   │   ├── make_promo_png.py  物料：生成竖版/方版预览 PNG（数字零手抄）
 │   │   ├── make_demo_gif.py   物料：合成演示 GIF（文字取自实跑输出）
 │   │   └── make_demo_page.py  物料：生成 docs/ 在线演示页
 │   ├── references/
@@ -305,10 +320,10 @@ mc-points-steward/
 │       ├── test_points_value.py 17 断言（钉死「积分现值折算」）
 │       ├── test_report_svg.py  18 断言（钉死「报告卡不崩、数字不漂」）
 │       ├── test_demo_gif.py    10 断言（钉死「GIF 选行质量」）
-│       ├── test_demo_page.py   17 断言（钉死「演示页自包含」）
+│       ├── test_demo_page.py   18 断言（钉死「演示页自包含」）
 │       ├── test_banner_svg.py  27 断言（钉死「横幅品牌元素 + 布局不越界」）
 │       ├── test_points_ladder.py 42 断言（钉死「天梯数字实算 + SVG 坐标不越界」）
-│       ├── test_promo_png.py    32 断言（钉死「宣传图数字实算 + 护栏 + 品牌色」）
+│       ├── test_promo_png.py    32 断言（钉死「预览图数字实算 + 护栏 + 品牌色」）
 │       ├── test_install.py     27 断言（加载冒烟）
 │       └── fixtures/           2026-10-12 真实调用快照（已脱敏）
 └── tools/
@@ -338,7 +353,7 @@ python tools/verify.py
 ■ L1 · 断言回归（保逻辑）       312 条断言全绿
 ■ L2 · 离线演示（保形态）       三段输出完整
 ■ L3 · 快照新鲜度（保链路）     默认查询快照：24 件 = 可兑 7 + 已下架 17
-■ L4 · 视觉物料（保呈现）       5 个产物校验通过
+■ L4 · 视觉物料（保呈现）       L4 通过
 ==================================================================
 结论：四层全绿，项目健康
 ```
@@ -399,9 +414,17 @@ python skill/scripts/demo.py              # 三段全跑
 python skill/scripts/demo.py --section 2  # 只看商城去伪那段
 ```
 
+### 手机端预览
+
+数字与天梯同源，全部由 fixtures 实算：
+
+![竖版预览 1080×1440](assets/promo-vertical.png)
+
+![方版预览 1080×1080](assets/promo-square.png)
+
 ## 视觉物料一键重建
 
-README 首图、演示 GIF、在线演示页、手机端宣传图全部由脚本生成，**数字零手抄**——
+README 首图、演示 GIF、在线演示页、预览 PNG 全部由脚本生成，**数字零手抄**——
 改了数据或判定逻辑，重跑即可，图文不会漂移：
 
 ```bash
@@ -413,21 +436,6 @@ python skill/scripts/make_demo_gif.py      # → assets/demo.gif
 python skill/scripts/make_demo_page.py     # → docs/index.html
 ```
 
-## 宣传物料：什么格式发到哪里
-
-不同平台吃不同格式，选错了不是效果打折就是根本打不开：
-
-| 物料 | 格式 | 尺寸 | 用途 |
-|---|---|---|---|
-| `assets/promo-vertical.png` | PNG | 1080×1440（3:4） | **小红书主图**、朋友圈长图 |
-| `assets/promo-square.png` | PNG | 1080×1080（1:1） | **朋友圈九宫格** |
-| `assets/points-ladder.gif` | GIF | 860×400 | 群聊动图、支持动图的平台 |
-| `assets/points-ladder.svg` | SVG | 矢量 | GitHub README、网页（**微信/小红书不显示**） |
-| `docs/index.html` | 网页 | — | 开 GitHub Pages 后发链接 |
-
-SVG 在微信与小红书都无法直接预览，位图（PNG/GIF）才是移动端可发的形态；
-两张 PNG 的数字与 GIF/SVG 同源，全部由 fixtures 实算。
-
 ## License
 
 [MIT](LICENSE)
@@ -438,6 +446,7 @@ SVG 在微信与小红书都无法直接预览，位图（PNG/GIF）才是移动
 
 ## 相关链接
 
+- 在线演示：https://yurenpai.github.io/mc-points-steward/
 - 大赛主页：https://github.com/M-China/mcd-developer-innovation-challenge
 - MCP 官方文档：https://open.mcd.cn/mcp/doc
 - MCP Server：https://github.com/M-China/mcd-mcp-server

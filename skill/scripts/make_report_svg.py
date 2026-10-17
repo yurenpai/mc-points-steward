@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-make_report_svg.py —— 生成「积分资产体检报告卡」（可截图发群 / 贴 README）
+make_report_svg.py —— 生成「积分资产体检报告卡」（贴 README / 演示页）
 
 为什么需要它：
-    本项目的输出长期只活在终端里（ASCII 文本）。同一份内容，图的传播
-    效率是文本的几十倍。本脚本把 W1/W2 的核心结论渲染成一张自包含 SVG。
+    本项目的输出长期只活在终端里（ASCII 文本）。同一份内容，图比纯文本
+    更容易一眼读懂。本脚本把 W1/W2 的核心结论渲染成一张自包含 SVG。
 
 设计约束：
     1. **数字零手抄** —— 全部由 tests/fixtures 实算（classify / points_value），

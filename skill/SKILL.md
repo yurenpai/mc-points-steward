@@ -96,7 +96,7 @@ python scripts/rank_products.py \
 2. **券面价藏在商品名里**（⚠️ 2026-10-12 更正，原表述"市价"是错的）：积分商品的 `price` 字段恒为 `"0"`；商品名里的数字（"6.9元可乐麦炫酷"）**不是商品市价，而是券后到店支付价**，实测 9 件与 `extTradePrice` **完全恒等**。脚本字段 `coupon_price`（`market_price` 为兼容别名）即此值。**MCP 不提供原价，因此本 Skill 不计算"真实折扣率"**——不得编造。
 3. **现金商品排除**：`point=0 && price>0` 是派对/品鉴会/体验营，与积分无关，不参与性价比排名。
 4. **临期分级**：`0 < days_left ≤ 7` 标 ⚠️，`≤ 3` 标 🔴。
-5. **缺字段不臆断**：缺 `downTime` 归"时效未知"栏，不标临期；无市价者单列不排名（绝不填 0）。
+5. **缺字段不臆断**：缺 `downTime` 归"时效未知"栏，不标临期；无券面价者单列不排名（绝不填 0）。
 6. **官方拼写坑**：`currentMouthExpirePoint`（Mouth 非 Month），三个过期字段全拼错，代码里必须原样照抄。
 7. **同名陷阱**（⚠️ 2026-10-12 更正结论）：不同 `spuId` 的商品**名字完全相同但积分差一倍**——实测「10.9元指定小食任选」有 100 分（spuId 17076）与 200 分（spuId 17077）两个。
    ⚠️ **但旧的"必须指出最低分那个"是错的**。查详情后确认：两者**不是同一个东西**——
@@ -169,9 +169,9 @@ python scripts/demo.py --section 2  # 单看兑换榜单（1 账本 / 2 榜单 /
 
 ```bash
 python scripts/make_banner_svg.py    # → assets/banner.svg（深棕底 + 金拱门品牌横幅）
-python scripts/make_report_svg.py   # → assets/report-card.svg（可截图发群的报告卡）
+python scripts/make_report_svg.py   # → assets/report-card.svg（积分资产体检报告卡）
 python scripts/make_points_ladder.py # → assets/points-ladder.{gif,svg}（积分解锁天梯）
-python scripts/make_promo_png.py     # → assets/promo-{vertical,square}.png（小红书/朋友圈宣传图）
+python scripts/make_promo_png.py     # → assets/promo-{vertical,square}.png（竖版/方版预览图）
 python scripts/make_demo_gif.py     # → assets/demo.gif（终端风演示动图）
 python scripts/make_demo_page.py    # → docs/index.html（可部署 Pages 的在线演示页）
 ```

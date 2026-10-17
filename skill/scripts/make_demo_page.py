@@ -14,7 +14,7 @@ make_demo_page.py —— 生成静态在线演示页 docs/index.html。
       1. report-card.svg  —— 代码直接内联进 HTML，无路径依赖；
       2. demo.gif          —— 复制一份到 docs/assets/demo.gif；
       3. points-ladder.gif —— 同样复制到 docs/assets/；
-      4. promo-*.png       —— 手机端宣传图，复制到 docs/assets/；
+      4. promo-*.png       —— 手机端预览图，复制到 docs/assets/；
       5. demo.py 输出     —— subprocess 实跑后转义进 <pre>，文字未改。
     产物 docs/ 目录可整体扔到任何静态服务器（包括本地 file:// 打开）。
 
@@ -221,11 +221,11 @@ __SVG__
   </tr>
 </table>
 
-<h2><span class="num">06</span>宣传物料：拿走就能发</h2>
-<p class="hint">移动端只认位图——SVG 在微信与小红书都无法预览。这两张 PNG 与 GIF/SVG 同源，数字全部由 fixtures 实算。</p>
+<h2><span class="num">06</span>手机端预览</h2>
+<p class="hint">竖版 / 方版预览图，数字与 GIF/SVG 同源，全部由 fixtures 实算。</p>
 <div class="promo-grid">
-<figure><img src="assets/promo-vertical.png" alt="小红书主图 1080x1440"><figcaption>小红书主图 · 1080×1440（3:4）</figcaption></figure>
-<figure><img src="assets/promo-square.png" alt="朋友圈方图 1080x1080"><figcaption>朋友圈九宫格 · 1080×1080（1:1）</figcaption></figure>
+<figure><img src="assets/promo-vertical.png" alt="竖版预览 1080x1440"><figcaption>竖版预览 · 1080×1440（3:4）</figcaption></figure>
+<figure><img src="assets/promo-square.png" alt="方版预览 1080x1080"><figcaption>方版预览 · 1080×1080（1:1）</figcaption></figure>
 </div>
 
 <h2><span class="num">07</span>安全边界</h2>
