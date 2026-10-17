@@ -45,7 +45,7 @@ L1_TESTS = [
     "test_filter.py", "test_rank.py", "test_cat_merge.py", "test_hidden_cost.py",
     "test_classify.py", "test_points_value.py", "test_report_svg.py",
     "test_demo_gif.py", "test_demo_page.py", "test_banner_svg.py",
-    "test_points_ladder.py",
+    "test_points_ladder.py", "test_promo_png.py",
     "test_install.py",
 ]
 L2_ANCHORS = [
@@ -61,6 +61,8 @@ L4_FILES = [
     (os.path.join("assets", "points-ladder.svg"), "svg"),
     (os.path.join("assets", "demo.gif"), "gif"),
     (os.path.join("assets", "points-ladder.gif"), "gif"),
+    (os.path.join("assets", "promo-vertical.png"), "png"),
+    (os.path.join("assets", "promo-square.png"), "png"),
     (os.path.join("docs", "index.html"), "html"),
 ]
 
@@ -205,7 +207,8 @@ def check_l4(rebuild=False):
     if rebuild:
         for script in ("make_banner_svg.py", "make_report_svg.py",
                        "make_points_ladder.py",
-                       "make_demo_gif.py", "make_demo_page.py"):
+                       "make_demo_gif.py", "make_promo_png.py",
+                       "make_demo_page.py"):
             path = os.path.join(SKILL, "scripts", script)
             print("  重建 %s ..." % script)
             try:
@@ -234,6 +237,11 @@ def check_l4(rebuild=False):
                     head = f.read(6)
                 if not head.startswith(b"GIF8"):
                     raise ValueError("GIF 头异常：%r" % head)
+            elif kind == "png":
+                with open(path, "rb") as f:
+                    head = f.read(8)
+                if head != b"\x89PNG\r\n\x1a\n":
+                    raise ValueError("PNG 魔数异常：%r" % head)
             elif kind == "html":
                 with open(path, encoding="utf-8") as f:
                     body = f.read()

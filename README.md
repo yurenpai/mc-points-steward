@@ -170,7 +170,7 @@ cd skill && python tests/test_install.py --install --smoke
 
 脚本**绝不输出主观判断**（不会说"这个划算"），只输出 `unit_price`、`days_left`、
 `cash_on_top`、`name_traps` 这样的确定性事实。好处：结果可复现、可测试、可审计——
-**280 条断言钉死行为**。
+**312 条断言钉死行为**。
 
 ### 2. 假上架去伪：不是拍脑袋的功能
 
@@ -279,7 +279,9 @@ mc-points-steward/
 │   ├── hidden-cost.svg        真可兑 9 件的隐藏现金成本图
 │   ├── points-ladder.svg      积分解锁天梯（静态版）
 │   ├── demo.gif               终端风演示动图（文字取自 demo.py 实跑）
-│   └── points-ladder.gif      积分解锁天梯（动态版）
+│   ├── points-ladder.gif      积分解锁天梯（动态版）
+│   ├── promo-vertical.png     小红书主图（1080×1440，数字全部实算）
+│   └── promo-square.png       朋友圈方图（1080×1080，数字全部实算）
 ├── skill/
 │   ├── SKILL.md               技能本体（工作流 / 数据陷阱 / 安全红线）
 │   ├── scripts/
@@ -306,6 +308,7 @@ mc-points-steward/
 │       ├── test_demo_page.py   17 断言（钉死「演示页自包含」）
 │       ├── test_banner_svg.py  27 断言（钉死「横幅品牌元素 + 布局不越界」）
 │       ├── test_points_ladder.py 42 断言（钉死「天梯数字实算 + SVG 坐标不越界」）
+│       ├── test_promo_png.py    32 断言（钉死「宣传图数字实算 + 护栏 + 品牌色」）
 │       ├── test_install.py     27 断言（加载冒烟）
 │       └── fixtures/           2026-10-12 真实调用快照（已脱敏）
 └── tools/
@@ -318,7 +321,7 @@ mc-points-steward/
 
 | 层 | 保什么 | 手段 |
 |---|---|---|
-| **L1 断言** | 逻辑 | 12 个测试文件，280 条断言 |
+| **L1 断言** | 逻辑 | 13 个测试文件，312 条断言 |
 | **L2 demo** | 形态 | 离线演示三段输出锚点检查 |
 | **L3 对账** | 链路 | 快照新鲜度体检 + 对话实时对账四步 |
 | **L4 物料** | 呈现 | SVG/GIF/HTML 产物在位与合法性 |
@@ -332,7 +335,7 @@ python tools/verify.py
 输出示例：
 
 ```
-■ L1 · 断言回归（保逻辑）       280 条断言全绿
+■ L1 · 断言回归（保逻辑）       312 条断言全绿
 ■ L2 · 离线演示（保形态）       三段输出完整
 ■ L3 · 快照新鲜度（保链路）     默认查询快照：24 件 = 可兑 7 + 已下架 17
 ■ L4 · 视觉物料（保呈现）       5 个产物校验通过
@@ -373,9 +376,10 @@ python tests/test_demo_gif.py     # 10 ✓
 python tests/test_demo_page.py    # 18 ✓
 python tests/test_banner_svg.py   # 27 ✓
 python tests/test_points_ladder.py # 42 ✓
+python tests/test_promo_png.py     # 32 ✓
 python tests/test_install.py --install --smoke   # 27 ✓
 
-# 合计 280 项
+# 合计 312 项
 ```
 
 ## 离线演示
@@ -397,15 +401,32 @@ python skill/scripts/demo.py --section 2  # 只看商城去伪那段
 
 ## 视觉物料一键重建
 
-README 首图、演示 GIF、在线演示页全部由脚本生成，**数字零手抄**——
+README 首图、演示 GIF、在线演示页、手机端宣传图全部由脚本生成，**数字零手抄**——
 改了数据或判定逻辑，重跑即可，图文不会漂移：
 
 ```bash
+python skill/scripts/make_banner_svg.py    # → assets/banner.svg
 python skill/scripts/make_report_svg.py    # → assets/report-card.svg
 python skill/scripts/make_points_ladder.py # → assets/points-ladder.{gif,svg}
+python skill/scripts/make_promo_png.py     # → assets/promo-{vertical,square}.png
 python skill/scripts/make_demo_gif.py      # → assets/demo.gif
 python skill/scripts/make_demo_page.py     # → docs/index.html
 ```
+
+## 宣传物料：什么格式发到哪里
+
+不同平台吃不同格式，选错了不是效果打折就是根本打不开：
+
+| 物料 | 格式 | 尺寸 | 用途 |
+|---|---|---|---|
+| `assets/promo-vertical.png` | PNG | 1080×1440（3:4） | **小红书主图**、朋友圈长图 |
+| `assets/promo-square.png` | PNG | 1080×1080（1:1） | **朋友圈九宫格** |
+| `assets/points-ladder.gif` | GIF | 860×400 | 群聊动图、支持动图的平台 |
+| `assets/points-ladder.svg` | SVG | 矢量 | GitHub README、网页（**微信/小红书不显示**） |
+| `docs/index.html` | 网页 | — | 开 GitHub Pages 后发链接 |
+
+SVG 在微信与小红书都无法直接预览，位图（PNG/GIF）才是移动端可发的形态；
+两张 PNG 的数字与 GIF/SVG 同源，全部由 fixtures 实算。
 
 ## License
 

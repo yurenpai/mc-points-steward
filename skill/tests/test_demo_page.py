@@ -62,8 +62,10 @@ def main():
     refs = re.findall(r'(?:src|href)="([^"]+)"', page)
     external = [r for r in refs if r.startswith(("http://", "https://", "../", "/"))]
     check("无外部/越界引用", external, [])
-    check("引用均为本地 GIF（demo + points-ladder）",
-          sorted(set(refs)), ["assets/demo.gif", "assets/points-ladder.gif"])
+    check("引用均为本地静态资源（2 GIF + 2 PNG）",
+          sorted(set(refs)),
+          ["assets/demo.gif", "assets/points-ladder.gif",
+           "assets/promo-square.png", "assets/promo-vertical.png"])
     check("points-ladder.gif 已本地化到 docs/assets/",
           os.path.isfile(os.path.join(os.path.dirname(PAGE), "assets",
                                       "points-ladder.gif")), True)

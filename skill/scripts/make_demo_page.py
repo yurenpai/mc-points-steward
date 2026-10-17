@@ -14,7 +14,8 @@ make_demo_page.py —— 生成静态在线演示页 docs/index.html。
       1. report-card.svg  —— 代码直接内联进 HTML，无路径依赖；
       2. demo.gif          —— 复制一份到 docs/assets/demo.gif；
       3. points-ladder.gif —— 同样复制到 docs/assets/；
-      4. demo.py 输出     —— subprocess 实跑后转义进 <pre>，文字未改。
+      4. promo-*.png       —— 手机端宣传图，复制到 docs/assets/；
+      5. demo.py 输出     —— subprocess 实跑后转义进 <pre>，文字未改。
     产物 docs/ 目录可整体扔到任何静态服务器（包括本地 file:// 打开）。
 
 用法:
@@ -117,6 +118,8 @@ def build():
                     border-radius: 10px; box-shadow: 0 2px 14px rgba(26,13,8,.18); }
   figure { margin: 24px 0; }
   figure img { width: 100%; border: 1px solid var(--line); border-radius: 10px; }
+  figure figcaption { color: var(--sub); font-size: 13px; text-align: center; margin-top: 10px; }
+  .promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 24px 0 8px; }
   figcaption { color: var(--sub); font-size: 12.5px; text-align: center; margin-top: 8px; }
   pre {
     background: #1E1D26; color: #E8E6DF; border-radius: 10px;
@@ -218,7 +221,14 @@ __SVG__
   </tr>
 </table>
 
-<h2><span class="num">06</span>安全边界</h2>
+<h2><span class="num">06</span>宣传物料：拿走就能发</h2>
+<p class="hint">移动端只认位图——SVG 在微信与小红书都无法预览。这两张 PNG 与 GIF/SVG 同源，数字全部由 fixtures 实算。</p>
+<div class="promo-grid">
+<figure><img src="assets/promo-vertical.png" alt="小红书主图 1080x1440"><figcaption>小红书主图 · 1080×1440（3:4）</figcaption></figure>
+<figure><img src="assets/promo-square.png" alt="朋友圈方图 1080x1080"><figcaption>朋友圈九宫格 · 1080×1080（1:1）</figcaption></figure>
+</div>
+
+<h2><span class="num">07</span>安全边界</h2>
 <p>涉及不可逆操作（兑换下单 <code>mall-create-order</code>、抽奖 <code>draw-lottery</code>）时，
 Skill 一定先把<strong>商品名、积分、有效期、到店另付金额</strong>摆出来，
 等你明确说「确认」才动手。资格判定只信官方的 <code>drawDecision</code>，
@@ -252,7 +262,8 @@ def main():
     os.makedirs(DOCS, exist_ok=True)
     # GIF 本地化：GitHub Pages 的 docs/ 为根，无法引用 ../assets/
     os.makedirs(os.path.join(DOCS, "assets"), exist_ok=True)
-    for name in ("demo.gif", "points-ladder.gif"):
+    for name in ("demo.gif", "points-ladder.gif",
+                 "promo-vertical.png", "promo-square.png"):
         src = os.path.join(ASSETS, name)
         dst = os.path.join(DOCS, "assets", name)
         if os.path.isfile(src):
@@ -265,10 +276,11 @@ def main():
         f.write(page)
 
     print("已生成 %s（%d 字节）" % (out, len(page.encode("utf-8"))))
-    for name in ("demo.gif", "points-ladder.gif"):
+    for name in ("demo.gif", "points-ladder.gif",
+                 "promo-vertical.png", "promo-square.png"):
         dst = os.path.join(DOCS, "assets", name)
         if os.path.isfile(dst):
-            print("GIF 副本 %s（%d 字节）" % (dst, os.path.getsize(dst)))
+            print("本地副本 %s（%d 字节）" % (dst, os.path.getsize(dst)))
     print("部署：GitHub 仓库 Settings → Pages → Branch: main · folder: /docs → Save")
 
     if args.open:
